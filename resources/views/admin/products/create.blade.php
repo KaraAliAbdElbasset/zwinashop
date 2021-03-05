@@ -100,17 +100,6 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="brand_id">marque</label>
-                                <select name="brand_id" id="brand_id" class="form-control select2 @error('brand_id') is-invalid @enderror">
-                                    @foreach($brands as $b)
-                                        <option value="{{$b->id}}" {{$b->id === old('brand_id') ? 'selected' : ''}}>{{$b->name}}</option>
-                                    @endforeach
-                                </select>
-                                @error('brand_id')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
                                 <label for="categories">Categories</label>
                                 <select multiple name="categories[]" id="categories" class="form-control select2 @error('categories') is-invalid @enderror">
                                     @foreach($categories as $c)

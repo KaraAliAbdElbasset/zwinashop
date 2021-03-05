@@ -53,8 +53,6 @@
                             <th>Image</th>
                             <th>Nom</th>
                             <th>Fournisseur</th>
-                            {{--                            <th>Product SKU</th>--}}
-                            <th>Marque</th>
                             <th>Categories</th>
                             <th>En vedette?</th>
                             <th>Etat</th>
@@ -71,10 +69,6 @@
                                 <td>{{$p->name}}</td>
                                 <td>{{$p->fournisseur}}</td>
 
-                                {{--                                <td>{{$p->sku}}</td>--}}
-                                <td>
-                                    <span class="badge badge-success"><a class="not-active" href="{{route('admin.brands.show',$p->brand_id)}}">{{$p->brand->name}}</a></span>
-                                </td>
                                 <td>
                                     @foreach($p->categories as $c)
                                         <span class="badge badge-success"><a class="not-active" href="{{route('admin.categories.show',$c->id)}}">{{$c->name}}</a></span>

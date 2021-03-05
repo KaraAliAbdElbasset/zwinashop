@@ -38,7 +38,6 @@ class ProductRepository implements \App\Contracts\ProductContract
             ->through([
                 \App\QueryFilter\Search::class,
                 \App\QueryFilter\Category::class,
-                \App\QueryFilter\Brand::class,
                 \App\QueryFilter\Sort::class,
             ])
             ->thenReturn()

@@ -248,33 +248,6 @@
                                             </div>
                                             @enderror
                                         </div>
-                                        {{--                                brand input--}}
-                                        <div class="form-group">
-                                            <label for="brand">Marque du produit</label>
-                                            <select id="brand"
-                                                    class="form-control select2 @error("brand_id") is-invalid @enderror" name="brand_id"
-                                                    style="width: 100%;">
-                                                @php
-                                                    if (isset($p))
-                                                        $brand_id = isset($p->brand) ? $p->brand->id : null
-                                                @endphp
-                                                @forelse($brands as $brand)
-                                                    <option value="{{$brand->id}}"
-                                                        {{$brand->id === $brand_id ? "selected" : ""}}>
-                                                        {{$brand->name}}
-                                                    </option>
-                                                @empty
-                                                    <option value="" disabled>
-                                                        No brand found
-                                                    </option>
-                                                @endforelse
-                                            </select>
-                                            @error("brand_id")
-                                            <div class="invalid-feedback">
-                                                {{$message}}
-                                            </div>
-                                            @enderror
-                                        </div>
                                     </div>
                                     <div class="tile-footer">
                                         <div class="row d-print-none mt-2">

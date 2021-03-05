@@ -66,10 +66,6 @@
                                 <p>{{$p->qte}}</p>
                             </div>
                             <div class="form-group">
-                                <label for="Brand">marque</label>
-                                <p><a href="{{route('admin.brands.show',$p->brand_id)}}">{{$p->brand->name}}</a></p>
-                            </div>
-                            <div class="form-group">
                                 <label for="categories">Categories</label>
                                 <p>
                                     @foreach($p->categories as $c)

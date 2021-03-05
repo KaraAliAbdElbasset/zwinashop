@@ -29,14 +29,9 @@ class CreateProductsTable extends Migration
             $table->boolean('is_active')->default(false);
             $table->bigInteger('popularity')->default(0);
             $table->integer('qte');
-            $table->foreignId('brand_id')
-                ->references('id')
-                ->on('brands')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
             $table->timestamps();
 
-            $table->index(['name','featured','is_active','qte','brand_id','popularity']);
+            $table->index(['name','featured','is_active','qte','popularity']);
         });
     }
 
@@ -47,9 +42,6 @@ class CreateProductsTable extends Migration
      */
     public function down(): void
     {
-        Schema::table('products', static function (Blueprint $table) {
-            $table->dropForeign('products_brand_id_foreign');
-        });
         Schema::dropIfExists('products');
     }
 }

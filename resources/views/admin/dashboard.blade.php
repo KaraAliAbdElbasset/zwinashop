@@ -23,25 +23,9 @@
     <!-- Small Box (Stat card) -->
     <h5 class="mb-2 mt-4">statistiques de ventes</h5>
     <div class="row">
-        <div class="col-lg-4 col-6">
-            <!-- small card -->
-            <div class="small-box bg-info">
-                <div class="inner">
-                    <h3>{{$b_count}}</h3>
-
-                    <p>marques</p>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-shopping-cart"></i>
-                </div>
-                <a href="{{route('admin.brands.index')}}" class="small-box-footer">
-                    info <i class="fas fa-arrow-circle-right"></i>
-                </a>
-            </div>
-        </div>
 
         <!-- ./col -->
-        <div class="col-lg-4 col-6">
+        <div class="col-lg-6 col-6">
             <!-- small card -->
             <div class="small-box bg-warning">
                 <div class="inner">
@@ -58,7 +42,7 @@
             </div>
         </div>
         <!-- ./col -->
-        <div class="col-lg-4 col-6">
+        <div class="col-lg-6 col-6">
             <!-- small card -->
             <div class="small-box bg-danger">
                 <div class="inner">
