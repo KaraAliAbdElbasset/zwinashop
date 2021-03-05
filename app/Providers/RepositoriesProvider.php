@@ -10,7 +10,6 @@ class RepositoriesProvider extends ServiceProvider
         \App\Contracts\UserContract::class =>  \App\Repositories\UserRepository::class,
         \App\Contracts\AdminContract::class =>  \App\Repositories\AdminRepository::class,
         \App\Contracts\CategoryContract::class =>  \App\Repositories\CategoryRepository::class,
-        \App\Contracts\BrandContract::class =>  \App\Repositories\BrandRepository::class,
         \App\Contracts\ProductContract::class =>  \App\Repositories\ProductRepository::class,
         \App\Contracts\OrderContract::class =>  \App\Repositories\OrderRepository::class,
     ];

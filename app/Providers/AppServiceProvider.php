@@ -35,7 +35,6 @@ class AppServiceProvider extends ServiceProvider
         View::composer(['website.partials.featuredProducts'],\App\Http\Views\Composers\FeaturedProductComposer::class);
         View::composer(['website.partials.inspiredProducts'],\App\Http\Views\Composers\InspiredProductComposer::class);
         View::composer(['website.partials.latestProducts'],\App\Http\Views\Composers\LatestProductComposer::class);
-        View::composer(['website.pages.shop'],\App\Http\Views\Composers\BrandComposer::class);
         View::composer(['website.pages.shop'],\App\Http\Views\Composers\CategoryComposer::class);
 
 
