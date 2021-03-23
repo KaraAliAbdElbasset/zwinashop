@@ -46,6 +46,7 @@
                         <a class="nav-link" id="vert-tabs-details-tab" data-toggle="pill" href="#vert-tabs-details" role="tab" aria-controls="vert-tabs-details" >Details</a>
                         <a class="nav-link" id="vert-tabs-description-tab" data-toggle="pill" href="#vert-tabs-description" role="tab" aria-controls="vert-tabs-description">Description</a>
                         <a class="nav-link " id="vert-tabs-images-tab" data-toggle="pill" href="#vert-tabs-images" role="tab" aria-controls="vert-tabs-images" >Images</a>
+                        <a class="nav-link" id="vert-tabs-attributes-tab" data-toggle="pill" href="#vert-tabs-attributes" role="tab" aria-controls="vert-tabs-attributes">Attributes</a>
 
                     </div>
                 </div>
@@ -311,6 +312,7 @@
 
                             {{-- ************************************************************ Images ********************************************************* --}}
                             <div class="tab-pane text-left fade show " id="vert-tabs-images" role="tabpanel" aria-labelledby="vert-tabs-images-tab">
+
                                 <div class="tab-pane" id="images">
                                     <div class="tile">
                                         <h3 class="tile-title">Ajouter des images</h3>
@@ -361,6 +363,13 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            {{-- ************************************************************ Attributes ********************************************************* --}}
+
+                            <div class="tab-pane text-left fade show " id="vert-tabs-attributes" role="tabpanel" aria-labelledby="vert-tabs-attributes-tab">
+                                <div class="tab-pane" id="attributes">
+                                    <product-attributes :productid="'{{ $p->id }}'"></product-attributes>
                                 </div>
                             </div>
                         </div>
@@ -450,4 +459,5 @@
             }
         }
     </script>
+    <script src="{{asset("js/app.js")}}"></script>
 @endpush

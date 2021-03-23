@@ -4,6 +4,7 @@
 namespace App\Helpers;
 
 
+use App\Models\AttributeProduct;
 use App\Models\Product;
 
 class Cart
@@ -33,36 +34,47 @@ class Cart
 
     /**
      * @param Product $product
-     * @param int $qty
+     * @param array $data
      */
-    public function add(Product $product,$qty = 1): void
+    public function add(Product $product,array $data): void
     {
-
         $item = [
+            'product_id' => $product->id,
             'name'  => $product->name,
             'img'  => $product->image_url,
+            'path'  => $product->path(),
+            'basePrice'  => $product->price,
             'price'  => $product->price,
             'qty'   => 0,
+            'attributes' => []
         ];
-        if (!array_key_exists($product->id,$this->getItems()))
+        $key = $product->id;
+        if (array_key_exists('attributes',$data))
         {
-            $this->items[$product->id] = $item;
+            $result = $this->getAttributeData($product,$data);
+            $item = $result['data'];
+            $key = $result['key'];
+        }
+
+        if (!array_key_exists($key,$this->getItems()))
+        {
+            $this->items[$key] = $item;
 
         }
-        $this->setTotalQty($this->getTotalQty()+$qty);
-        $this->setTotalPrice($this->getTotalPrice() + $product->price);
-        $this->items[$product->id]['qty'] += $qty;
+
+        $this->setTotalQty($this->getTotalQty()+$data['qty']);
+        $this->setTotalPrice($this->getTotalPrice() + $item['price'] * $data['qty']);
+        $this->items[$key]['qty'] += $data['qty'];
     }
 
     public function update(array $items): void
     {
+
         foreach ($items as $key => $qty)
         {
             $this->items[$key]["qty"] = $qty;
         }
-
         $collection = collect($this->getItems());
-
         $this->total_price = $collection->sum(function ($item){
             return $item["price"] * $item["qty"];
         });
@@ -73,24 +85,79 @@ class Cart
     }
 
     /**
+     * @param Product $p
+     * @param array $data
+     */
+    public function getAttributeData(Product $p,array $data)
+    {
+        $item = [
+            'product_id' => $p->id,
+            'name'  => $p->name,
+            'path'  => $p->path(),
+            'img'  => $p->image_url,
+            'basePrice'  => $p->price,
+            'price'  => $p->price,
+            'qty'   => 0,
+            'attributes' => []
+        ];
+
+        $key = $p->id;
+        if (array_key_exists('size', $data['attributes']))
+        {
+            $size = AttributeProduct::where([
+                'product_id' => $p->id,
+                'attribute' => 'size',
+                'id' => $data['attributes']['size']
+            ])->first();
+            $item['attributes']['size'] = [
+                'id' => $size->id,
+                'value' => $size->value,
+                'price' => $size->price,
+            ] ;
+            $key .= '-' . $data['attributes']['size'];
+            $item['price'] += $size->price;
+        }
+
+        if (array_key_exists('color',$data['attributes']))
+        {
+            $color = AttributeProduct::where([
+                'product_id' => $p->id,
+                'attribute' => 'color',
+                'id' => $data['attributes']['color']
+            ])->firstOrFail();
+            $item['attributes']['color'] = [
+                'id' => $color->id,
+                'value' => $color->value,
+                'price' => $color->price,
+            ] ;
+            $key .= '-' . $data['attributes']['color'];
+            $item['price'] += $color->price;
+        }
+
+        return [
+            'data' => $item,
+            'key' => $key
+        ];
+    }
+
+    /**
      * @param $id
      */
     public function remove($id): void
     {
         $collection = collect($this->getItems());
         // get the item who will be deleted
-        $item = $collection->get((int)$id);
+        $item = $collection->get($id);
         // calculate the new subTotalPrice
         $this->setTotalPrice($this->getTotalPrice() - $item["price"] * $item["qty"]);
         // calculate the nrw totalQty
         $this->setTotalQty($this->getTotalQty() - $item["qty"]);
 
         // remove the item from the list of items
-        $filtered = $collection->filter(function ($value, $key) use($id){
-            return $key!==(int)$id;
-        });
-        // update the list of items
-        $this->setItems($filtered->all());
+        $collection->forget($id);
+
+
+        $this->setItems($collection->all());
     }
 
     /**

@@ -37,6 +37,8 @@ class ProductRepository implements \App\Contracts\ProductContract
             ->send(Product::scopes($scopes)->with($relations)->newQuery())
             ->through([
                 \App\QueryFilter\Search::class,
+                \App\QueryFilter\Color::class,
+                \App\QueryFilter\Price::class,
                 \App\QueryFilter\Category::class,
                 \App\QueryFilter\Sort::class,
             ])

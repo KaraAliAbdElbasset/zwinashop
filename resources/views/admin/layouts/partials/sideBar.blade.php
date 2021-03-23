@@ -5,7 +5,7 @@
              alt="AdminLTE Logo"
              class="brand-image img-circle elevation-3"
              style="opacity: .8">
-        <span class="brand-text font-weight-light">7 clics</span>
+        <span class="brand-text font-weight-light">Zwina</span>
     </a>
 
     <!-- Sidebar -->
@@ -60,21 +60,15 @@
                 </li>
                 @endif
 
-                <li class="nav-item has-treeview {{request()->is(['admin/categories*','admin/brands*','admin/products*'])? 'menu-open' : ''}}">
-                    <a href="#" class="nav-link {{request()->is(['admin/categories*','admin/brands*','admin/products*'])? 'active' : ''}} ">
+                <li class="nav-item has-treeview {{request()->is(['admin/categories*','admin/products*'])? 'menu-open' : ''}}">
+                    <a href="#" class="nav-link {{request()->is(['admin/categories*','admin/products*'])? 'active' : ''}} ">
                         <i class="nav-icon fas fa-table"></i>
                         <p>
                             Management des Produits
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview" style="display: {{request()->is(['admin/categories*','admin/brands*','admin/products*'])? 'block' : 'none'}} ">
-                        <li class="nav-item ">
-                            <a href="{{route('admin.brands.index')}}" class="nav-link {{request()->is('admin/brands*')? 'active' : ''}}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>marques </p>
-                            </a>
-                        </li>
+                    <ul class="nav nav-treeview" style="display: {{request()->is(['admin/categories*','admin/products*'])? 'block' : 'none'}} ">
                         <li class="nav-item">
                             <a href="{{route('admin.categories.index')}}" class="nav-link {{request()->is('admin/categories*')? 'active' : ''}}">
                                 <i class="far fa-circle nav-icon"></i>

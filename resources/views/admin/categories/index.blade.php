@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title','Brands Index')
+@section('title','Categories Index')
 
 @push('css')
     <link rel="stylesheet" href="{{asset('assets/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">

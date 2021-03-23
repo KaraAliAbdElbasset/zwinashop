@@ -24,28 +24,27 @@ class CartController extends Controller
 
     public function store(ProductContract $productRepository,$id)
     {
-        $this->validate(\request(),[
-            "qty" => "sometimes|nullable|numeric|gt:0"
+        $data =$this->validate(\request(),[
+            "qty" => "sometimes|nullable|numeric|gt:0",
+            "attributes" => 'sometimes|nullable|array',
+            "attributes.*" => 'required_with:attributes|integer|gt:0'
         ]);
 
         $product = $productRepository->findOneById($id);
 
         if (session()->has("cart"))
         {
-            $cart = new Cart(session()->get("cart"));
+            $cart = new Cart(session('cart'));
         }else
         {
             $cart = new Cart();
         }
-
-        $cart->add($product,\request("qty"));
+        $cart->add($product,$data);
         session()->put("cart",$cart);
         session()->flash("success","Product has been added To Your Cart");
         session()->flash("product",$product);
 
-
         return redirect()->back();
-
     }
 
 
@@ -58,7 +57,7 @@ class CartController extends Controller
             'items.*.gt' => 'The product qty must be greater than 0.'
         ]);
 
-        $cart = new Cart(session()->get("cart"));
+        $cart = new Cart(session('cart'));
         $cart->update($data["items"]);
 
         session()->put("cart",$cart);
@@ -70,18 +69,25 @@ class CartController extends Controller
     {
         if (session()->has("cart"))
         {
-            $cart = new Cart(session("cart"));
-            $cart->remove($id);
-            if (count($cart->getItems())>0)
-            {
-                session()->put("cart",$cart);
-            }else{
-                session()->forget("cart");
+            try {
+                $cart = new Cart(session("cart"));
+                $cart->remove($id);
+                if (count($cart->getItems())>0)
+                {
+                    session()->put("cart",$cart);
+                }else{
+                    session()->forget("cart");
 
+                }
+
+                session()->flash("success","Product Has Been Removed From Your Cart");
+                return redirect()->back();
+            }catch (\Exception $exception)
+            {
+                session()->flash("error","Oops! Something went wrong");
+                return back();
             }
 
-            session()->flash("success panier","produit ajouté au panier avec succès");
-            return redirect()->back();
 
         }
         session()->flash("error","Aucun produit dans votre panier");
@@ -118,24 +124,30 @@ class CartController extends Controller
             'email' => 'sometimes|nullable|email',
             'address' => 'required|string|max:200',
             'phone' => 'required|string|max:50',
-            'city' => 'required|string|max:50',
-            'province' => 'required|string|max:50',
+            'wilaya' => 'required|string|max:50',
+            'commune' => 'required|string|max:50',
         ]);
+
+
         try {
             $c = new Cart(session('cart'));
 
-            $items = collect($c->getItems())->map(static function($i,$key){
-                DB::table('products')
-                    ->where('id', 1)->increment('popularity',1);
+            $items = collect($c->getItems())->mapWithKeys(static function($i,$key){
+//                DB::table('products')
+//                    ->where('id', 1)->increment('popularity',1);
                 return [
-                    'qty' => $i['qty'],
-                    'price' => $i['price'],
-                    'total' => $i['qty'] * $i['price'],
+                    $i['product_id'] => [
+                        'qty' => $i['qty'],
+                        'price' => $i['price'],
+                        'total' => $i['qty'] * $i['price'],
+                        'attributes' => $i['attributes']
+                    ]
                 ];
             });
             $data['total_qty'] = $c->getTotalQty();
             $data['total_price'] = $c->getTotalPrice();
             $order = Order::create($data);
+
             $order->products()->attach($items->all());
 //            mail to  admin
             Mail::to(config('settings.default_email_address'))->send(new AdminOrderMail($order));
@@ -147,11 +159,11 @@ class CartController extends Controller
             session()->forget('cart');
             cache()->forget('NewestOrderCountCache');
             session()->flash('success','Order Has Been Created Successfully');
-            return redirect('/');
+            return back();
         }catch (\Exception $exception)
         {
-            session()->flash('error',$exception->getMessage().'Oops! Something went wrong');
-            return redirect('/');
+            session()->flash('error','Oops! Something went wrong');
+            return back();
         }
     }
 }

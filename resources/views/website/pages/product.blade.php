@@ -1,161 +1,273 @@
 @extends('layouts.app')
 
-@section('banner_area')
- <meta property="og:title" content="{!! $p->name !!}">
-    <meta property="og:description" content="{!! $p->description !!}">
-    <meta property="og:url" content="{!! $p->path() !!}">
-    <meta property="og:image" content="{!! $p->image_url !!}">
-    <meta property="product:brand" content="{!! $p->brand->name !!}">
-    <meta property="product:availability" content="in stock">
-    <meta property="product:condition" content="new">
-    <meta property="product:price:amount" content="@price($p->price)">
-    <meta property="product:price:currency" content="{{config('settings.currency_code')}}">
-    <meta property="product:retailer_item_id" content="{!! $p->id !!}">
-    <meta property="product:item_group_id" content="{!! $p->id !!}">
-    <!--================Home Banner Area =================-->
-
-                    </div>
-                    <div class="text-center">
-                     <h2>Details du Produit</h5>
-                    </div>
- 
-    <!--================End Home Banner Area =================-->
-
-@endsection
-
 @section('content')
-    <div class="product_image_area">
-        <div class="container">
-            <div class="row s_product_inner">
-                <div class="col-lg-6">
-                    <div class="s_product_img">
-                        <div
-                            id="carouselExampleIndicators"
-                            class="carousel slide"
-                            data-ride="carousel"
-                        >
-                            <ol class="carousel-indicators">
-                                @foreach($images as $key => $img)
-                                    <li
-                                    data-target="#carouselExampleIndicators"
-                                    data-slide-to="{{$key}}"
-                                    @if($loop->first) class="active" @endif
-                                >
-                                    <img width="60px" height="60px" style="object-fit: cover; "
-                                        src="{{$img}}"
-                                        alt=""
-                                    />
-                                </li>
-                                @endforeach
-                            </ol>
-                            <div class="carousel-inner">
-                                @foreach($images as $img)
-                                    <div class="carousel-item @if($loop->first) active @endif">
-                                        <img
-                                            class="d-block w-100"
-                                            src="{{$img}}"
-                                            alt="First slide"
-                                        />
-                                    </div>
-                                @endforeach
+    <!-- breadcrumb -->
+    <div class="container">
+        <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+            <a href="{{route('welcome')}}" class="stext-109 cl8 hov-cl1 trans-04">
+                Home
+                <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+            </a>
 
+            <a href="{{route('shop')}}" class="stext-109 cl8 hov-cl1 trans-04">
+                Guendoura
+                <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+            </a>
+
+            <span class="stext-109 cl4">
+				{{$p->name}}
+			</span>
+        </div>
+    </div>
+
+
+    <!-- Product Detail -->
+    <section class="sec-product-detail bg0 p-t-65 p-b-60">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-7 p-b-30">
+                    <div class="p-l-25 p-r-30 p-lr-0-lg">
+                        <div class="wrap-slick3 flex-sb flex-w">
+                            <div class="wrap-slick3-dots"></div>
+                            <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+
+                            <div class="slick3 gallery-lb">
+                                @foreach($images as $img)
+                                <div class="item-slick3" data-thumb="{{$img['image']}}" data-attribute="{{$img['attribute']}}" id="slick-{{$img['attribute']}}">
+                                    <div class="wrap-pic-w pos-relative" >
+                                        <img src="{{$img['image']}}" alt="IMG-PRODUCT" id="img-{{$img['attribute']}}">
+
+                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" id="link-{{$img['attribute']}}" href="{{$img['image']}}">
+                                            <i class="fa fa-expand"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                @endforeach
 
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5 offset-lg-1">
-                    <div class="s_product_text">
-                        <h3>{{$p->name}}</h3>
-                        <h2>@price($p->price) {{config('settings.currency_code')}}</h2>
-                        <ul class="list">
-                            <li>
 
-                                <span>Categorie</span> : @foreach($p->categories as $c)
-                                    <a class="active" href="#">
-                                        {{$c->name}}</a>
-                                        @if(!$loop->last) , @endif
-                                @endforeach
-                            </li>
-                            <li>
-                                <a href="#"> <span>Disponibilité</span> : {{$p->qte > 0 ? 'En Stock' : 'Non Disponible'}}</a>
-                            </li>
-                        </ul>
-                        <p>
+                <div class="col-md-6 col-lg-5 p-b-30">
+                    <div class="p-r-50 p-t-5 p-lr-0-lg">
+                        <h4 class="mtext-105 cl2 js-name-detail p-b-14">
+                            {{$p->name}}
+                        </h4>
+
+                        <span class="mtext-106 cl2" id="display-price">
+							DZD @price($p->price)
+						</span>
+
+                        <p class="stext-102 cl3 p-t-23">
                             {{$p->excerpt}}
                         </p>
                         <form action="{{route('cart.store',$p->id)}}" method="post">
                             @csrf
-                        <div class="product_count">
-                            <label for="qty">Quantité:</label>
-                            <input
-                                type="text"
-                                name="qty"
-                                id="sst"
-                                maxlength="12"
-                                value="1"
-                                title="Quantity:"
-                                class="input-text qty"
-                            />
-                            <button
-                                onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                class="increase items-count"
-                                type="button"
-                            >
-                                <i class="lnr lnr-chevron-up"></i>
-                            </button>
-                            <button
-                                onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                                class="reduced items-count"
-                                type="button"
-                            >
-                                <i class="lnr lnr-chevron-down"></i>
-                            </button>
-                        </div>
-                        <div class="card_area">
-                            <button class="main_btn" type="submit">Acheter</button>
+                            <div class="p-t-33">
+                                @if($attributes->has('size'))
+                                    <div class="flex-w flex-r-m p-b-10">
+                                        <div class="size-203 flex-c-m respon6">
+                                            Size
+                                        </div>
 
-                        </div>
+                                        <div class="size-204 respon6-next">
+                                            <div class="rs1-select2 bor8 bg0">
+                                                <select name="attributes[size]" id="size" class="js-select2" name="size">
+                                                    <option disabled selected>Choose an option</option>
+                                                    @foreach($attributes['size'] as $s)
+                                                        <option value="{{$s->id}}" data-price="{{$s->price}}">Size {{$s->value}} (+DZD @price($s->price))</option>
+                                                    @endforeach
+
+                                                </select>
+                                                <div class="dropDownSelect2"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+
+                                @if($attributes->has('color'))
+                                    <div class="flex-w flex-r-m p-b-10">
+                                        <div class="size-203 flex-c-m respon6">
+                                            Color
+                                        </div>
+
+                                        <div class="size-204 respon6-next">
+                                            <div class="rs1-select2 bor8 bg0">
+                                                <select id="color" name="attributes[color]" class="js-select2">
+                                                    <option disabled selected>Choose an option</option>
+                                                    @foreach($attributes['color'] as $key => $s)
+                                                        <option value="{{$s->id}}" data-price="{{$s->price}}">{{$s->value}} (+DZD @price($s->price))</option>
+                                                    @endforeach
+                                                </select>
+                                                <div class="dropDownSelect2"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                                <div class="flex-w flex-r-m p-b-10">
+                                    <div class="size-204 flex-w flex-m respon6-next">
+                                        <div class="wrap-num-product flex-w m-r-20 m-tb-10">
+                                            <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                                <i class="fs-16 zmdi zmdi-minus"></i>
+                                            </div>
+
+                                            <input class="mtext-104 cl3 txt-center num-product" min="1" type="number" name="qty" value="1">
+
+                                            <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                                <i class="fs-16 zmdi zmdi-plus"></i>
+                                            </div>
+                                        </div>
+
+                                        <button type="submit" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                            Ajouter au panier
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
                         </form>
+                        <!--  -->
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="bor10 m-t-50 p-t-43 p-b-40">
+                <!-- Tab01 -->
+                <div class="tab01">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item p-b-10">
+                            <a class="nav-link active" data-toggle="tab" href="#description" role="tab">Description</a>
+                        </li>
+
+                        <li class="nav-item p-b-10">
+                            <a class="nav-link" data-toggle="tab" href="#information" role="tab">Additional information</a>
+                        </li>
+
+
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content p-t-43">
+                        <!-- - -->
+                        <div class="tab-pane fade show active" id="description" role="tabpanel">
+                            <div class="how-pos2 p-lr-15-md">
+                                <p class="stext-102 cl6">
+                                    {!! $p->description !!}
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- - -->
+                        <div class="tab-pane fade" id="information" role="tabpanel">
+                            <div class="row">
+                                <div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
+                                    <ul class="p-lr-28 p-lr-15-sm">
+                                        <li class="flex-w flex-t p-b-7">
+											<span class="stext-102 cl3 size-205">
+												Weight
+											</span>
+
+                                            <span class="stext-102 cl6 size-206">
+												0.79 kg
+											</span>
+                                        </li>
+
+                                        <li class="flex-w flex-t p-b-7">
+											<span class="stext-102 cl3 size-205">
+												Dimensions
+											</span>
+
+                                            <span class="stext-102 cl6 size-206">
+												110 x 33 x 100 cm
+											</span>
+                                        </li>
+
+                                        <li class="flex-w flex-t p-b-7">
+											<span class="stext-102 cl3 size-205">
+												Materials
+											</span>
+
+                                            <span class="stext-102 cl6 size-206">
+												60% cotton
+											</span>
+                                        </li>
+
+                                        <li class="flex-w flex-t p-b-7">
+											<span class="stext-102 cl3 size-205">
+												Color
+											</span>
+
+                                            <span class="stext-102 cl6 size-206">
+												Black, Blue, Grey, Green, Red, White
+											</span>
+                                        </li>
+
+                                        <li class="flex-w flex-t p-b-7">
+											<span class="stext-102 cl3 size-205">
+												Size
+											</span>
+
+                                            <span class="stext-102 cl6 size-206">
+												XL, L, M, S
+											</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!--================End Single Product Area =================-->
 
+        <div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
+			<span class="stext-107 cl6 p-lr-25">
+				Name: {{$p->name}}
+			</span>
 
-    <!--================Product Description Area =================-->
-    @if($p->description)
-    <section class="product_description_area">
-        <div class="container text-center">
-            <h4 ><span class="border border-warning p-2">Description</span></h4>
-        </div>       
-                
-        
-        <div class="container text-center mt-4 border border-warning">
-                 <p><span class=" p-1 mt-4"> {!! $p->description !!}</span></p>
+            <span class="stext-107 cl6 p-lr-25">
+				Categories: Jacket, Men @foreach($p->categories as $c) {{!$loop->last ?$c->name.' ,' : $c->name}} @endforeach
+			</span>
         </div>
-        
     </section>
-    
-    
-   
-</div>
-    @endif
-        @if($product->count() > 0)
-
-    <div class="h4 text-center"> Porduits Similaires</div>
-    <div class="container">
-    <div class="row">
-
-    @foreach($product as $b_prod)
-        <div class="col-3">
-    @include('layouts.partials.product_card',['p' => $b_prod])
-        </div>
-    @endforeach
-
-    </div>
-    </div>
-    @endif
 @endsection
+
+
+@push('js')
+    <script>
+        let basePrice = {{$p->price}};
+        let colorPrice = 0;
+        let sizePrice = 0;
+        $('#color').change(function(e) {
+            // var slideno = $('options').data('slide');
+            colorPrice = $(this).find(':selected').data('price');
+            //.toFixed(2) .00
+            let total = parseInt(basePrice) + parseInt(colorPrice) +parseInt(sizePrice);
+            $('#display-price').html(`DZD ${total.format(0,3)}`)
+            // $('.slider-nav').slick('slickGoTo', slideno - 1);
+        });
+
+        $('#size').change(function(e) {
+            // var slideno = $('options').data('slide');
+            sizePrice = $(this).find(':selected').data('price');
+            //.toFixed(2) .00
+            let total = parseInt(basePrice) + parseInt(colorPrice) +parseInt(sizePrice);
+            $('#display-price').html(`DZD ${total.format(0,3)}`)
+            // $('.slider-nav').slick('slickGoTo', slideno - 1);
+        });
+
+        @if($errors->has('attribute') > 0)
+            swal('Error', "Please Select attribute", "Error");
+        @endif
+
+        @if(session()->has('success'))
+        swal("Success", '{{session('success')}}');
+        @endif
+
+    </script>
+@endpush

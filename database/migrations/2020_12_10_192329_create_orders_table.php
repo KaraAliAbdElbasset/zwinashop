@@ -22,7 +22,9 @@ class CreateOrdersTable extends Migration
             $table->string('email')->nullable();
             $table->string('total_price');
             $table->string('total_qty');
-            $table->enum('state',['pending','canceled','validated'])->default('pending');
+            $table->string('wilaya');
+            $table->string('commune');
+            $table->enum('state',['pending','processing','canceled','validated'])->default('pending');
             $table->timestamps();
         });
     }

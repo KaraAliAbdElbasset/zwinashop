@@ -24,7 +24,7 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         $rules =  [
-            'name' => 'required|string|max:100|unique:brands,name',
+            'name' => 'required|string|max:100|unique:categories,name',
             'category_id' => 'required|numeric|gte:0',
             'image' => 'sometimes|nullable|file|image|max:5000',
             'description' => 'sometimes|nullable|string|max:200',
@@ -33,7 +33,7 @@ class CategoryRequest extends FormRequest
 
         if ($this->method() === 'PUT')
         {
-            $rules['name'] = 'required|string|max:100|unique:brands,name'.$this->route('brand');
+            $rules['name'] = 'required|string|max:100|unique:categories,name,'.$this->route('category');
         }
         return $rules;
     }

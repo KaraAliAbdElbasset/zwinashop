@@ -29,7 +29,6 @@ class ProductRequest extends FormRequest
             'excerpt' => 'required|string|max:200',
             'description' => 'sometimes|nullable|string',
             'description_seo' => 'sometimes|nullable|string|max:200',
-            'brand_id' => 'required|numeric|gt:0',
             'categories' => 'sometimes|nullable|array',
             'categories.*' => 'required|numeric|gt:0',
             'qte' => 'required|numeric|gte:0',

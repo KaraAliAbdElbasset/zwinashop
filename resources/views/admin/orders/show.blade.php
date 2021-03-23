@@ -46,10 +46,10 @@
 
                     <!-- Main content -->
                     <div class="invoice p-3 mb-3">
-                       
+
                         <!-- title row -->
                         <div class="row">
-                            
+
                             <div class="col-12">
                                <img src="{{asset('assets/site/img/logob.png')}}"  height="75px" width="150px"/>
                                <h6>
@@ -79,6 +79,8 @@
                                 <address>
                                     <strong>{{$o->name}}</strong><br>
                                     {{$o->address}}<br>
+                                    {{$o->city}}<br>
+                                    {{$o->province}}<br>
                                     telephone: {{$o->phone}}<br>
                                     @if($o->email)
                                         E-mail: {{$o->email}}
@@ -106,7 +108,7 @@
                                         <th>Quantité</th>
                                         <th>Produit</th>
                                         <th>Prix</th>
-                                        <th>Description</th>
+                                        <th>détail</th>
                                         <th>total</th>
                                     </tr>
                                     </thead>
@@ -116,7 +118,16 @@
                                         <td>{{$p->pivot->qty}}</td>
                                         <td>{{$p->name}}</td>
                                         <td>{{$p->pivot->price}} {{config('settings.currency_code')}}</td>
-                                        <td>{{$p->excerpt}}</td>
+                                        <td>
+                                            @if($p->pivot->attributes)
+                                                @foreach($p->pivot->attributes as $key =>$at)
+                                                    <span>attribute : {{$key}} | valeur : {{$at['value']}} | price : {{$at['price']}} </span>
+                                                    <br>
+                                                @endforeach
+                                            @else
+                                                /
+                                            @endif
+                                        </td>
                                         <td>@price($p->pivot->total) {{config('settings.currency_code')}}</td>
                                     </tr>
                                     @endforeach

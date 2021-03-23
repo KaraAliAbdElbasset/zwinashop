@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Contracts\BrandContract;
 use App\Contracts\CategoryContract;
 use App\Contracts\ProductContract;
 use App\Http\Controllers\Controller;
@@ -19,15 +18,14 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = $this->p->findByFilter(10, ['categories', 'brand'],['latest']);
+        $products = $this->p->findByFilter(10, ['categories'],['latest']);
         return view('admin.products.index', compact('products'));
     }
 
-    public function create(BrandContract $b,CategoryContract $c)
+    public function create(CategoryContract $c)
     {
         $categories = $c->all();
-        $brands = $b->all();
-        return view('admin.products.create',compact('categories','brands'));
+        return view('admin.products.create',compact('categories'));
     }
 
     public function store(ProductRequest $request)
@@ -47,16 +45,15 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $p = $this->p->findOneBy(['id' => $id], ['categories', 'images', 'brand']);
+        $p = $this->p->findOneBy(['id' => $id], ['categories', 'images']);
         return view('admin.products.show', compact('p'));
     }
 
-    public function edit($id,CategoryContract $c,BrandContract $b)
+    public function edit($id,CategoryContract $c)
     {
         $categories = $c->all();
-        $brands = $b->all();
-        $p = $this->p->findOneBy(['id' => $id], ['categories', 'images', 'brand']);
-        return view('admin.products.edit', compact('p','categories','brands'));
+        $p = $this->p->findOneBy(['id' => $id], ['categories', 'images']);
+        return view('admin.products.edit', compact('p','categories'));
     }
 
     public function update($id, ProductRequest $request)

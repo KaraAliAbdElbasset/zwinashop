@@ -17,7 +17,7 @@ class AdminSeeder extends Seeder
         Admin::create([
            'name' => 'Web Site Owner',
            'role' => 'owner',
-           'email' => 'owner@7clic.com',
+           'email' => 'admin@email.com',
            'password' => bcrypt('password'),
         ]);
     }

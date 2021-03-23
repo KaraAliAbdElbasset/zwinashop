@@ -46,14 +46,14 @@ class Product extends Model
 
     public function getImageUrlAttribute()
     {
+        // for testing
+        if (Str::contains($this->image,'http'))
+        {
+            return $this->image;
+        }
         return isset($this->image) ?
             asset('storage/'.$this->image) :
             asset('assets/admin/dist/img/default-150x150.png');
-    }
-
-    public function brand(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Brand::class);
     }
 
     public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -75,19 +75,26 @@ class Product extends Model
     {
         return $q->where('featured',true);
     }
-    
+
      public function scopeLatest($q)
     {
         return $q->orderBy('created_at','desc');
     }
-    
+
     public function path()
     {
         return route('product',['id'=>$this->id,'slug'=>Str::slug($this->name)]);
     }
 
+    public function attributes(){
+        return $this->hasMany(AttributeProduct::class);
+    }
+
     public function orders()
     {
-        return $this->belongsToMany(Order::class)->withPivot(['qty','price','total'])->withTimestamps();
+        return $this->belongsToMany(Order::class,'order_details')
+            ->withPivot(['qty','price','total','attributes'])
+            ->using(OrderDetail::class)
+            ->withTimestamps();
     }
 }

@@ -1,151 +1,195 @@
 @extends('layouts.app')
 
+@push('css')
+
+
+@endpush
 
 @section('content')
-      <!--================Home Banner Area =================-->
 
 
-                    <div class="h2 text-center mb-0" style="  background: #f6f6f6;
-    z-index: 1;">
-
-                        <a href="{{route('shop')}}" class="text-dark">Boutique</a>
-                    </div>
-
-
-    <!--================End Home Banner Area =================-->
-    <section class="cat_product_area section_gap">
+    <!-- Product -->
+    <div class="bg0 m-t-23 p-b-140">
         <div class="container">
-            <div class="row flex-row-reverse">
-                <div class="col-lg-9">
-                    <form action="{{route('shop')}}" id="formFilter">
-                        <input type="hidden" name="category" value="{{request('category')}}">
-                        <input type="hidden" name="brand" value="{{request('brand')}}">
-                        <div class="product_top_bar">
-                            <div class="left_dorp">
-                                <select class="sorting filter" name="sort" onchange="document.getElementById('formFilter').submit()">
-                                    <option disabled  >Trier par ...</option>
-                                     <option  selected value="created_at" {{request('sort') === 'created_at' ? 'selected' :''}} >Nouveautés</option>
-                                    <option value="name" {{request('sort') === 'name' ? 'selected' :''}} >Trier par nom</option>
-                                    <option value="price" {{request('sort') === 'price' ? 'selected' :''}}>Trier par prix</option>
-                                    <option value="qte" {{request('sort') === 'qte' ? 'selected' :''}}>Trier par quantité</option>
-                                    <option value="popularity" {{request('sort') === 'popularity' ? 'selected' :''}}>Trier par popolarité</option>
-                                </select>
+            <div class="flex-w flex-sb-m p-b-52">
+                <div class="flex-w flex-l-m filter-tope-group m-tb-10">
+                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 {{!request('category') || request('category') === '' ? 'how-active1' :''}}" onclick="location='{{route('shop')}}'">
+                        Tous les produits
+                    </button>
+                    @foreach($categories as $c)
+                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 {{request('category') === $c->slug ? 'how-active1' : ''}}" onclick="location='{{route('shop')}}?category={{$c->slug}}'">
+                        {{$c->name}}
+                    </button>
+                    @endforeach
+                </div>
 
-                                <input type="text" name="search" placeholder="nom du produit" value="{{request('search')}}" class="show filter mx-auto ">
-                                <button type="submit" class="search btn mx-auto"><i class="fa fa-search"></i></button>
-                            </div>
+                <div class="flex-w flex-c-m m-tb-10">
+                    <div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
+                        <i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
+                        <i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+                        Filter
+                    </div>
 
+                    <div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
+                        <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
+                        <i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+                        Search
+                    </div>
+                </div>
 
-                        </div>
-                    </form>
-                    <div class="latest_product_inner">
-                        <div class="row">
+                <!-- Search product -->
+                    <div class="dis-none panel-search w-full p-t-10 p-b-15">
+                        <div class="bor8 dis-flex p-l-15">
+                            <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+                                <i class="zmdi zmdi-search"></i>
+                            </button>
+                            <form action="">
 
-                            @foreach($products as $p)
-                            <div class="col-6 col-lg-3 col-md-3 mx-auto ">
-                                @include('layouts.partials.product_card',compact('p'))
-                            </div>
-                            @endforeach
+                            <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search" placeholder="Search">
+                            </form>
 
                         </div>
                     </div>
 
-                     <div  class="container mx-auto mt-2">{{$products->onEachSide(2)->links()}}</div>
-                </div>
-                 <div class="col-lg-3">
-                    <div class="left_sidebar_area">
-                        <aside class="left_widgets p_filter_widgets">
-                            <div class="l_w_title">
-                                <h3>Categories</h3>
-                                <a href="{{route('shop')}}" class="text-dark">voir tout</a>
+
+                <!-- Filter -->
+                <div class="dis-none panel-filter w-full p-t-10">
+                    <div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
+
+
+                        <div class="filter-col2 p-r-15 p-b-27">
+                            <div class="mtext-102 cl2 p-b-15">
+                                Price
                             </div>
-                            <div class="widgets_inner">
-                                <ul class="">
-                                    @foreach($categories as $c)
-                                    @if($c->children->count()>0)
-                                        <li @if($c->id == request('category')) class="active" @endif >
-                                         <span  class="text-body"  data-toggle="collapse" data-target="#cc" > <i class="fa fa-chevron-circle-right text-primary"></i> {{$c->name}} </span>
-                                                                         <ul  id='cc'>
-                                                                         <li ><a href="{{route('shop',[
-                                                                        'category' => $c->id,
-                                                                        'brand' => request('brand'),
-                                                                        'sort' => request('sort'),
-                                                                        'per_page' => request('per_page'),
-                                                                        ])}}" style="
-                                                                        display: inline-block;
-                                                                        text-align: left;" class="ml-3 text-body"><i class="fa fa-circle  text-primary"></i> Toutes</a></li>
 
+                            <ul>
+                                <li class="p-b-6">
+                                    <a href="{{route('shop')}}" class="filter-link stext-106 trans-04 {{!request('price')  ? 'filter-link-active' : ''}} ">
+                                        All
+                                    </a>
+                                </li>
 
-                                                                            @foreach($c->children as $cc)
+                                <li class="p-b-6">
+                                    <a href="{{route('shop')}}?price=0.00,500.00" class="filter-link stext-106 trans-04 {{request('price') === '0.00,500.00' ? 'filter-link-active' : ''}} ">
+                                        DZD0.00 - DZD500.00
+                                    </a>
+                                </li>
 
-                                                                            <li> <a href="{{route('shop',[
-                                                                        'category' => $cc->id,
-                                                                        'brand' => request('brand'),
-                                                                        'sort' => request('sort'),
-                                                                        'per_page' => request('per_page'),
-                                                                        ])}}" style="
-                                                                        display: inline-block;
-                                                                        text-align: left;" class="ml-3 text-body"> <i class="fa fa-circle  text-warning"></i> {{$cc->name}}</a></li>
-                                                                            @endforeach
-                                                                        </ul>
-                                        </li>
-                                     @else
-                                      <li @if($c->id == request('category')) class="active" @endif >
-                                      <a  class="text-body"
+                                <li class="p-b-6">
+                                    <a href="{{route('shop')}}?price=500.00,1000.00" class="filter-link stext-106 trans-04 {{request('price') === '500.00,1000.00' ? 'filter-link-active' : ''}} ">
+                                        DZD500.00 - DZD1000.00
+                                    </a>
+                                </li>
 
+                                <li class="p-b-6">
+                                    <a href="{{route('shop')}}?price=1000.00,1500.00" class="filter-link stext-106 trans-04 {{request('price') === '1000.00,1500.00' ? 'filter-link-active' : ''}} ">
+                                        DZD1000.00 - DZD1500.00
+                                    </a>
+                                </li>
 
+                                <li class="p-b-6">
+                                    <a href="{{route('shop')}}?price=1500.00,5000.00" class="filter-link stext-106 trans-04 {{request('price') === '1500.00,5000.00' ? 'filter-link-active' : ''}} ">
+                                        DZD1500.00 - DZD5000.00
+                                    </a>
+                                </li>
 
-                                                                        href="{{route('shop',[
-                                                                        'category' => $c->id,
-                                                                        'brand' => request('brand'),
-                                                                        'sort' => request('sort'),
-                                                                        'per_page' => request('per_page'),
-                                                                        ])}}"><i class="fa fa-chevron-circle-right text-primary"></i> {{$c->name}}</a>
-                                        </li>
+                                <li class="p-b-6">
+                                    <a href="{{route('shop')}}?price=5000+" class="filter-link stext-106 trans-04 {{request('price') === '5000+' ? 'filter-link-active' : ''}} price">
+                                        DZD5000.00+
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
 
-                                     @endif
-
-
-                                    @endforeach
-                                </ul>
+                        <div class="filter-col3 p-r-15 p-b-27">
+                            <div class="mtext-102 cl2 p-b-15">
+                                Color
                             </div>
-                        </aside>
 
-                        <aside class="left_widgets p_filter_widgets">
-                            <div class="l_w_title">
-                                <h3>Marques</h3>
-                            </div>
-                            <div class="widgets_inner">
-                                <ul class="list">
-                                    @foreach($brands as $b)
-                                    <li @if($b->id == request('brand')) class="active" @endif>
-                                        <a href="{{route('shop',[
-                                                                      'category' => request('category'),
-                                                                        'brand' => $b->id,
-                                                                        'order' => request('sort'),
-                                                                        'per_page' => request('per_page'),
-                                                                        ])}}">{{$b->name}}</a>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </aside>
+                            <ul>
+                                <li class="p-b-6">
+									<span class="fs-15 lh-12 m-r-6" style="color: #222;">
+										<i class="zmdi zmdi-circle"></i>
+									</span>
 
+                                    <a href="{{route('shop')}}?color=black" class="filter-link {{request('color') === 'black' ? 'filter-link-active' : ''}} stext-106 trans-04">
+                                        Black
+                                    </a>
+                                </li>
+
+                                <li class="p-b-6">
+									<span class="fs-15 lh-12 m-r-6" style="color: #4272d7;">
+										<i class="zmdi zmdi-circle"></i>
+									</span>
+
+                                    <a href="{{route('shop')}}?color=blue" class="filter-link stext-106 trans-04 {{request('color') === 'blue' ? 'filter-link-active' : ''}}">
+                                        Blue
+                                    </a>
+                                </li>
+
+                                <li class="p-b-6">
+									<span class="fs-15 lh-12 m-r-6" style="color: #b3b3b3;">
+										<i class="zmdi zmdi-circle"></i>
+									</span>
+
+                                    <a href="{{route('shop')}}?color=grey" class="filter-link {{request('color') === 'grey' ? 'filter-link-active' : ''}} stext-106 trans-04">
+                                        Grey
+                                    </a>
+                                </li>
+
+                                <li class="p-b-6">
+									<span class="fs-15 lh-12 m-r-6" style="color: #00ad5f;">
+										<i class="zmdi zmdi-circle"></i>
+									</span>
+
+                                    <a href="{{route('shop')}}?color=green" class="filter-link {{request('color') === 'green' ? 'filter-link-active' : ''}} stext-106 trans-04">
+                                        Green
+                                    </a>
+                                </li>
+
+                                <li class="p-b-6">
+									<span class="fs-15 lh-12 m-r-6" style="color: #fa4251;">
+										<i class="zmdi zmdi-circle"></i>
+									</span>
+
+                                    <a href="{{route('shop')}}?color=red" class="filter-link {{request('color') === 'red' ? 'filter-link-active' : ''}} stext-106 trans-04">
+                                        Red
+                                    </a>
+                                </li>
+
+                                <li class="p-b-6">
+									<span class="fs-15 lh-12 m-r-6" style="color: #aaa;">
+										<i class="zmdi zmdi-circle-o"></i>
+									</span>
+
+                                    <a href="{{route('shop')}}?color=white" class="filter-link {{request('color') === 'white' ? 'filter-link-active' : ''}} stext-106 trans-04">
+                                        White
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
 
 
                     </div>
                 </div>
+            </div>
 
+            <div class="row isotope-grid">
+                @foreach($products as $product)
+                    @include('website.partials.productCard',['product' => $product])
+                @endforeach
 
             </div>
-        </div>
-    </section>
 
+            <!-- Load more -->
+            <div class="flex-c-m flex-w w-full p-t-45">
+                {{$products->onEachSide(3)->links()}}
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('js')
 
-    <script src="{{asset('assets/site/vendors/counter-up/jquery.waypoints.min.js')}}"></script>
-    <script src="{{asset('assets/site/vendors/counter-up/jquery.counterup.js')}}"></script>
 
 @endpush

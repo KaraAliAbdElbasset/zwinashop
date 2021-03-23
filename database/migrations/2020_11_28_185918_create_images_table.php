@@ -11,7 +11,7 @@ class CreateImagesTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('images', function (Blueprint $table) {
             $table->id();
