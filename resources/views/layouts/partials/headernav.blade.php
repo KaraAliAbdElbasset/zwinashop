@@ -46,9 +46,8 @@
                                     <i class="zmdi zmdi-globe" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">العربية</a>
-                                    <a class="dropdown-item" href="#">Français</a>
-
+                                    <a class="dropdown-item" href="{{route('switchLang','ar')}}">العربية</a>
+                                    <a class="dropdown-item" href="{{route('switchLang','fr')}}">Français</a>
                                 </div>
                             </div>
 
@@ -183,8 +182,8 @@
                                 <i class="zmdi zmdi-globe" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">العربية</a>
-                                <a class="dropdown-item" href="#">Français</a>
+                                <a class="dropdown-item" href="{{route('switchLang','ar')}}">العربية</a>
+                                <a class="dropdown-item" href="{{route('switchLang','fr')}}">Français</a>
 
                             </div>
                         </div>

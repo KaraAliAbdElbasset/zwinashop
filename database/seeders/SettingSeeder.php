@@ -13,15 +13,15 @@ class SettingSeeder extends Seeder
     protected $settings = [
         [
             'key'                       =>  'site_name',
-            'value'                     =>  '7Clics',
+            'value'                     =>  'Zwina-Shop',
         ],
         [
             'key'                       =>  'contact_email',
-            'value'                     =>  'contact@7clics.com',
+            'value'                     =>  'contact@Zwina-Shop.com',
         ],
         [
             'key'                       =>  'default_email_address',
-            'value'                     =>  'info@7clics.com',
+            'value'                     =>  'info@Zwina-Shop.com',
         ],
         [
             'key'                       =>  'phone_1',

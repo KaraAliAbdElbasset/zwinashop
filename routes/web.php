@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('lang.switch')->group(static function(){
     Route::get('/', [\App\Http\Controllers\WebsiteController::class,'index'])->name('welcome');
+    Route::get('lang/{locale}',[\App\Http\Controllers\WebsiteController::class,'switchLang'])->name('switchLang');
+
     Route::get('/shop', [\App\Http\Controllers\WebsiteController::class,'shop'])->name('shop');
     Route::get('/shop/{id}-{slug}', [\App\Http\Controllers\WebsiteController::class,'product'])->name('product');
     Route::post('newsletter',[\App\Http\Controllers\Admin\NewsLetterController::class,'store'])->name('newsletter.store');

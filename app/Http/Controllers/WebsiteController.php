@@ -57,4 +57,11 @@ class WebsiteController extends Controller
     {
         return view('website.pages.about');
     }
+
+    public function switchLang($lang)
+    {
+        session()->put('locale',$lang);
+        return redirect()->back();
+
+    }
 }
