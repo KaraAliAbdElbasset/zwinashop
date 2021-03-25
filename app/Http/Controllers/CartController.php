@@ -43,7 +43,10 @@ class CartController extends Controller
         session()->put("cart",$cart);
         session()->flash("success","Product has been added To Your Cart");
         session()->flash("product",$product);
-
+        if (request()->has('buy'))
+        {
+            return redirect()->route('cart.index');
+        }
         return redirect()->back();
     }
 
@@ -128,7 +131,6 @@ class CartController extends Controller
             'commune' => 'required|string|max:50',
         ]);
 
-
         try {
             $c = new Cart(session('cart'));
 
@@ -150,7 +152,7 @@ class CartController extends Controller
 
             $order->products()->attach($items->all());
 //            mail to  admin
-            Mail::to(config('settings.default_email_address'))->send(new AdminOrderMail($order));
+           // Mail::to(config('settings.default_email_address'))->send(new AdminOrderMail($order));
 //            mail to client
             if ($order->email){
                 Mail::to($order->email)->send(new ClientOrderMail($order));
@@ -161,7 +163,7 @@ class CartController extends Controller
             session()->flash('success','Order Has Been Created Successfully');
             return back();
         }catch (\Exception $exception)
-        {
+        {   dd($exception);
             session()->flash('error','Oops! Something went wrong');
             return back();
         }

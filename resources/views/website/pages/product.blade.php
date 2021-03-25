@@ -62,7 +62,7 @@
                         <p class="stext-102 cl3 p-t-23">
                             {{$p->excerpt}}
                         </p>
-                        <form action="{{route('cart.store',$p->id)}}" method="post">
+                        <form action="{{route('cart.store',$p->id)}}" method="post" id="addForm">
                             @csrf
                             <div class="p-t-33">
                                 @if($attributes->has('size'))
@@ -121,6 +121,9 @@
 
                                         <button type="submit" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
                                             Ajouter au panier
+                                        </button>
+                                        <button onclick="buy()" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                            Acheter Maintenant
                                         </button>
                                     </div>
                                 </div>
@@ -260,6 +263,16 @@
             $('#display-price').html(`DZD ${total.format(0,3)}`)
             // $('.slider-nav').slick('slickGoTo', slideno - 1);
         });
+
+        const buy = ()=>{
+            let form = document.getElementById('addForm');
+            let input = document.createElement('input');
+            input.name = 'buy';
+            input.value = 'on'
+            input.type='hidden';
+            form.append(input);
+            form.submit();
+        }
 
         @if($errors->has('attribute') > 0)
             swal('Error', "Please Select attribute", "Error");
