@@ -1,0 +1,27 @@
+<?php
+return [
+    'id'     => 'ID',
+    'name'   => 'Nom',
+    'status' => 'Statut',
+    'type'   => "Type d'affichage",
+    'admin'  => [
+        'title'          => "Groupe d'attribut",
+        'create_success' => "Création d'un nouvel article réussie!",
+        'edit_success'   => "Modification d'un article réussie!",
+        'list'           => "Liste de groupes d'attributs",
+        'id'             => 'ID',
+        'name'           => 'Nom',
+        'status'         => 'Statut',
+        'action'         => 'Action',
+        'edit'           => 'Modifier',
+        'export'         => 'Exporter',
+        'delete'         => 'Supprimer',
+        'refresh'        => 'Actualiser',
+        'result_item'    => 'Showing <b>:item_from</b> to <b>:item_to</b> of <b>:item_total</b> items</b>',
+        'sort'           => 'Trier',
+        'search'         => 'Rechercher',
+        'add_new'        => 'Ajouter un nouvel article',
+        'add_new_title'  => "Ajouter un nouveau groupe d'attribut",
+        'add_new_des'    => "Créer un nouveau groupe d'attribut",
+    ],
+];

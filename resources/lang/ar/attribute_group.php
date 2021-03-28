@@ -1,0 +1,27 @@
+<?php
+return [
+    'id'     => 'ID',
+    'name'   => 'الاسم',
+    'status' => 'الحالة',
+    'type'   => 'عرض الانواع',
+    'admin'  => [
+        'title'          => 'مجموعة الخصائص',
+        'create_success' => '!إنشاء عنصر جديد بنجاح',
+        'edit_success'   => '!تم تحديث العنصر',
+        'list'           => 'قائمة مجموعة الخصائص',
+        'id'             => 'ID',
+        'name'           => 'اسم',
+        'status'         => 'الحالة',
+        'action'         => 'عملية',
+        'edit'           => 'تعديل',
+        'export'         => 'تصدير',
+        'delete'         => 'حذف',
+        'refresh'        => 'تحديث',
+        'result_item'    => 'عرض <b>:item_from</b> to <b>:item_to</b> of <b>:item_total</b> items</b>',
+        'sort'           => 'فرز',
+        'search'         => 'بحث',
+        'add_new'        => 'اضف جديد',
+        'add_new_title'  => 'اضف مجموعة الخصائص',
+        'add_new_des'    => 'أنشئ مجموعة خصائص جديدة',
+    ],
+];
