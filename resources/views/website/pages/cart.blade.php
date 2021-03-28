@@ -12,12 +12,12 @@
     <div class="container">
         <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
             <a href="{{route('welcome')}}" class="stext-109 cl8 hov-cl1 trans-04">
-                Home
+                {{trans('front.home')}}
                 <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
             </a>
 
             <span class="stext-109 cl4">
-				Shoping Cart
+				{{trans('front.cart')}}
 			</span>
         </div>
     </div>
@@ -32,13 +32,13 @@
                     <form action="{{route('cart.update')}}" method="post" id="formUpdate">
                         <div class="m-l-25 m-r--38 m-lr-0-xl">
                             <div class="wrap-table-shopping-cart">
-                                <table class="table-shopping-cart">
+                                <table id="tbl" class="table-shopping-cart">
                                     <tr class="table_head">
-                                        <th class="column-1">Product</th>
-                                        <th class="column-2">Image</th>
-                                        <th class="column-3">Price</th>
-                                        <th class="column-4">Quantity</th>
-                                        <th class="column-5">Total</th>
+                                        <th class="column-1">{{trans('front.product')}}</th>
+                                        <th class="column-2">{{trans('front.image')}}</th>
+                                        <th class="column-3">{{trans('front.price')}}</th>
+                                        <th class="column-4">{{trans('front.quantity')}}</th>
+                                        <th class="column-5">{{trans('front.total')}}</th>
                                     </tr>
                                     @if(session('cart'))
                                         @csrf
@@ -70,7 +70,7 @@
                                         @endforeach
                                     @else
                                         <tr class="table-row">
-                                            <td class="column-1 text-center" colspan="5">No Product In Your Cart</td>
+                                            <td class="column-1 text-center" colspan="5">{{trans('front.empty_product')}}</td>
                                         </tr>
                                     @endif
                                 </table>
@@ -79,7 +79,7 @@
                         <div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
 
                             <div  class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
-                                <span onclick='document.querySelector("#formUpdate").submit()'>Update Cart</span>
+                                <span onclick='document.querySelector("#formUpdate").submit()'>{{trans('front.update_cart')}}</span>
                             </div>
                         </div>
                         @endif
@@ -90,13 +90,13 @@
                 <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
                     <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
                         <h4 class="mtext-109 cl2 p-b-30">
-                            Cart Totals
+                            {{trans('front.total')}}:
                         </h4>
 
                         <div class="flex-w flex-t bor12 p-b-13">
                             <div class="size-208">
 								<span class="stext-110 cl2">
-									Subtotal:
+									{{trans('front.total')}}:
 								</span>
                             </div>
 
@@ -110,7 +110,7 @@
                         <div class="flex-w flex-t bor12 p-t-15 p-b-30">
                             <div class="size-208 w-full-ssm">
 								<span class="stext-110 cl2">
-								Commande :
+								{{trans('front.order')}}:
 								</span>
                             </div>
 
@@ -119,42 +119,42 @@
                                     @csrf
                                 <div class="p-t-15">
                                     <div class="bor8 bg0 m-b-12">
-                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" required min="2"  type="text" name="last_name" placeholder="Nom">
+                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" required min="2"  type="text" name="last_name" placeholder="{{trans('front.contact_form.name')}}">
                                     </div>
                                     @error('last_name')
                                     <div class="text-danger"> {{$message}}</div>
                                     @enderror
 
                                     <div class="bor8 bg0 m-b-12">
-                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="first_name" placeholder="Prenom">
+                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="first_name" placeholder="{{trans('front.contact_form.lastname')}}">
                                     </div>
                                     @error('first_name')
                                     <div class="text-danger"> {{$message}}</div>
                                     @enderror
 
                                     <div class="bor8 bg0 m-b-12">
-                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="phone" placeholder="Telephone">
+                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="phone" placeholder="{{trans('front.contact_form.phone')}}">
                                     </div>
                                     @error('phone')
                                     <div class="text-danger"> {{$message}}</div>
                                     @enderror
 
                                     <div class="bor8 bg0 m-b-12">
-                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="address" placeholder="Adresse">
+                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="address" placeholder="{{trans('front.shop_info.address')}}">
                                     </div>
                                     @error('address')
                                     <div class="text-danger"> {{$message}}</div>
                                     @enderror
 
                                     <div class="bor8 bg0 m-b-12">
-                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="wilaya" placeholder="Wilaya">
+                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="wilaya" placeholder="{{trans('front.contact_form.wilaya')}}">
                                     </div>
                                     @error('wilaya')
                                     <div class="text-danger"> {{$message}}</div>
                                     @enderror
 
                                     <div class="bor8 bg0 m-b-22">
-                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="commune" placeholder="Commune">
+                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="commune" placeholder="{{trans('front.contact_form.commune')}}">
                                     </div>
                                     @error('commune')
                                     <div class="text-danger"> {{$message}}</div>
@@ -169,7 +169,7 @@
                         <div class="flex-w flex-t p-t-27 p-b-33">
                             <div class="size-208">
 								<span class="mtext-101 cl2">
-									Total:
+									{{trans('front.total')}}:
 								</span>
                             </div>
 
@@ -181,7 +181,7 @@
                         </div>
 
                         <button onclick="document.getElementById('order-form').submit()" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-                            Commander Maintenant
+                            {{trans('front.commander_mnt')}}
                         </button>
                         @endif
                     </div>
@@ -196,6 +196,13 @@
 @push('js')
     <!-- SweetAlert2 -->
     <script src="{{asset('assets/admin/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
+<!--
+    <script src="{{asset('assets/admin/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('assets/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('assets/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{asset('assets/admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+-->
+
     <script>
 
         @if(session()->has('success'))
@@ -250,6 +257,8 @@
             document.body.appendChild(f);
             return f;
         }
+
+
     </script>
 
 @endpush

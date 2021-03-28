@@ -16,23 +16,23 @@
                     <div class="menu-desktop">
                         <ul class="main-menu">
                             <li>
-                                <a href="{{url('/')}}">Accueil</a>
+                                <a href="{{url('/')}}">{{trans('front.home')}}</a>
 
                             </li>
 
                             <li>
-                                <a href="{{route('shop')}}">Boutique</a>
+                                <a href="{{route('shop')}}">{{trans('front.shop')}}</a>
                             </li>
 
 
 
 
                             <li>
-                                <a href="{{route('about')}}">A propos</a>
+                                <a href="{{route('about')}}">{{trans('front.about')}}</a>
                             </li>
 
                             <li>
-                                <a href="{{route('contact')}}">Contact</a>
+                                <a href="{{route('contact')}}">{{trans('front.contact')}}</a>
                             </li>
                         </ul>
                     </div>
@@ -79,7 +79,7 @@
             <!-- Icon header -->
             <div class="wrap-icon-header flex-w flex-r-m h-full m-r-15">
                 <div class="flex-c-m h-full p-r-5">
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="2">
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="{{session()->has('cart')? session('cart')->getTotalQty() : 0 }}">
                         <i class="zmdi zmdi-shopping-cart"></i>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
         <div class="menu-mobile">
             <ul class="main-menu-m">
                 <li>
-                    <a href="{{url('/')}}">Accueil</a>
+                    <a href="{{url('/')}}">{{trans('front.home')}}</a>
 
                     <span class="arrow-main-menu-m">
 						<i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -106,14 +106,14 @@
                 </li>
 
                 <li>
-                    <a href="{{route('shop')}}">Boutique</a>
+                    <a href="{{route('shop')}}">{{trans('front.shop')}}</a>
                 </li>
                 <li>
-                    <a href="{{route('about')}}">A propos</a>
+                    <a href="{{route('about')}}">{{trans('front.about')}}</a>
                 </li>
 
                 <li>
-                    <a href="{{route('contact')}}">Contact</a>
+                    <a href="{{route('contact')}}">{{trans('front.contact')}}</a>
                 </li>
             </ul>
         </div>
@@ -126,7 +126,7 @@
 
             <form class="container-search-header">
                 <div class="wrap-search-header">
-                    <input class="plh0" type="text" name="search" placeholder="Search...">
+                    <input class="plh0" type="text" name="search" placeholder="{{trans('front.search')}}...">
 
                     <button class="flex-c-m trans-04">
                         <i class="zmdi zmdi-search"></i>
@@ -154,23 +154,23 @@
                     <div class="menu-desktop">
                         <ul class="main-menu">
                             <li>
-                                <a href="{{route('welcome')}}">Accueil</a>
+                                <a href="{{route('welcome')}}">{{trans('front.home')}}</a>
 
                             </li>
 
                             <li>
-                                <a href="{{route('shop')}}">Boutique</a>
+                                <a href="{{route('shop')}}">{{trans('front.shop')}}</a>
                             </li>
 
 
 
 
                             <li>
-                                <a href="{{route('about')}}">A propos</a>
+                                <a href="{{route('about')}}">{{trans('front.about')}}</a>
                             </li>
 
                             <li>
-                                <a href="{{route('contact')}}">Contact</a>
+                                <a href="{{route('contact')}}">{{trans('front.contact')}}</a>
                             </li>
                         </ul>
                     </div>
@@ -214,7 +214,7 @@
             <!-- Icon header -->
             <div class="wrap-icon-header flex-w flex-r-m h-full m-r-15">
                 <div class="flex-c-m h-full p-r-5">
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="2">
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="{{session()->has('cart')? session('cart')->getTotalQty() : 0 }}">
                         <i class="zmdi zmdi-shopping-cart"></i>
                     </div>
                 </div>
@@ -233,7 +233,7 @@
         <div class="menu-mobile">
             <ul class="main-menu-m">
                 <li>
-                    <a href="{{route('welcome')}}">Accueil</a>
+                    <a href="{{route('welcome')}}">{{trans('front.home')}}</a>
 
                     <span class="arrow-main-menu-m">
 						<i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -241,14 +241,14 @@
                 </li>
 
                 <li>
-                    <a href="{{route('shop')}}">Boutique</a>
+                    <a href="{{route('shop')}}">{{trans('front.shop')}}</a>
                 </li>
                 <li>
-                    <a href="{{route('about')}}">A propos</a>
+                    <a href="{{route('about')}}">{{trans('front.about')}}</a>
                 </li>
 
                 <li>
-                    <a href="{{route('contact')}}">Contact</a>
+                    <a href="{{route('contact')}}">{{trans('front.contact')}}</a>
                 </li>
             </ul>
         </div>
@@ -261,7 +261,7 @@
 
             <form class="container-search-header">
                 <div class="wrap-search-header">
-                    <input class="plh0" type="text" name="search" placeholder="Search...">
+                    <input class="plh0" type="text" name="search" placeholder="{{trans('front.search')}}">
 
                     <button class="flex-c-m trans-04">
                         <i class="zmdi zmdi-search"></i>
