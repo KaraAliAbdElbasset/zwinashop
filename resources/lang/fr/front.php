@@ -30,6 +30,7 @@ return [
     'compare'            => 'Comparer',
     'add_to_compare'     => 'Ajouter pour comparaison',
     'add_to_cart'        => 'Ajouter au panier',
+    'new_collection'     => 'nouvelle collection',
     'forgot_password'    => 'Mot de passe oublié',
     'reset_password'     => 'Réinitialiser le mot de passe',
     'login'              => "S'identifier",

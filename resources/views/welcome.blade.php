@@ -22,7 +22,7 @@
 
                                 <div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
                                     <h2 class="ltext-104 txt-center cl0 p-t-22 p-b-40 respon1">
-                                        {{trans('product.new_collection')}}
+                                        {{trans('front.new_collection')}}
                                     </h2>
                                 </div>
 

@@ -6,6 +6,7 @@ return [
     'alias'                                 => 'Url customize <span class="seo" title="SEO"><i class="fa fa-coffee" aria-hidden="true"></i></span>',
     'sku_validate'                          => 'Seulement les caractère dans ce groupe: "A-Z", "a-z", "0-9" and "-_" ',
     'sku_unique'                            => 'SKU existe déjà',
+    'new_collection'                        => 'nouvelle collection ',
     'alias_validate'                        => 'Maximum 100 caractères dans ce groupe: "A-Z", "a-z", "0-9" and "-_" ',
     'alias_unique'                          => "L'alias existe déjà",
     'description'                           => 'Product description',
@@ -62,7 +63,6 @@ return [
     'select_length'                         => "Selectionner l'unité de la longueur",
     'minimum'                               => 'Minimum',
     'minimum_help'                          => 'Quantité minimum en une seule commande. 0 est illimité',
-    'new_collection'                    =>'nouvelle collection ',
     'admin'                                 => [
         'title'                             => 'Gestionnaire de produit',
         'create_success'                    => "Création d'un nouvel article réussie!",

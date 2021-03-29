@@ -25,6 +25,8 @@ return [
     'compare'            => 'قارن',
     'add_to_compare'     => 'أضف للمقارنة',
     'add_to_cart'        => 'أضف إلى السلة',
+    'new_collection'     =>'المجموعة الجديدة',
+
     'forgot_password'    => 'هل نسيت كلمة المرور',
     'reset_password'     => 'إعادة تعيين كلمة المرور',
     'login'              => 'تسجيل الدخول',
