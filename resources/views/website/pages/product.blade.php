@@ -177,7 +177,7 @@
 			</span>
 
             <span class="stext-107 cl6 p-lr-25">
-				Categories: Jacket, Men @foreach($p->categories as $c) {{!$loop->last ?$c->name.' ,' : $c->name}} @endforeach
+				Categories:@foreach($p->categories as $c) {{!$loop->last ?$c->name.' ,' : $c->name}} @endforeach
 			</span>
         </div>
     </section>
