@@ -37,6 +37,7 @@ return [
     'shop'               => 'الصفحة الرئيسية  للمتجر',
     'blog'               => 'مدونة',
     'contact'            => 'اتصل بنا',
+    'copyright'          =>' Develop/IT  جميع الحقوق محفوظة',
     'about'              => 'معلومات عنا',
     'cms_category'       => 'CMS categories',
     'categories'         => 'الفئات',

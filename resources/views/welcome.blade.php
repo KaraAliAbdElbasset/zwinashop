@@ -21,11 +21,10 @@
                                 </div>
 
                                 <div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
-                                    <h2 class="ltext-104 txt-center cl0 p-t-22 p-b-40 respon1">
+                                    <h2 class="ltext-10a4 txt-center cl0 p-t-22 p-b-40 respon1">
                                         {{trans('front.new_collection')}}
                                     </h2>
                                 </div>
-
                                 <div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
                                     <a href="{{route('shop')}}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn2 p-lr-15 trans-04">
                                         {{trans('front.shop')}}
@@ -35,6 +34,7 @@
                         </div>
                     </div>
                 @endforeach
+
 {{--                <div class="item-slick1 bg-overlay1" style="background-image: url({{asset('assets/site/images/slide-05.jpg')}});" data-thumb="{{asset('assets/site/images/thumb-01.jpg')}}" data-caption="Zwina Store">--}}
 {{--                    <div class="container h-full">--}}
 {{--                        <div class="flex-col-c-m h-full p-t-100 p-b-60 respon5">--}}

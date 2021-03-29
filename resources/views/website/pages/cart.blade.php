@@ -39,6 +39,8 @@
                                         <th class="column-3">{{trans('front.price')}}</th>
                                         <th class="column-4">{{trans('front.quantity')}}</th>
                                         <th class="column-5">{{trans('front.total')}}</th>
+                                        <th class="column-6"></th>
+
                                     </tr>
                                     @if(session('cart'))
                                         @csrf
@@ -66,6 +68,9 @@
                                                     </div>
                                                 </td>
                                                 <td class="column-5">DZD @price($i['qty'] * $i['price'])</td>
+                                                <td class="column-5">
+                                                    <h5><a href="javascript:void(0)" onclick="deleteForm({{$key}})">x</a></h5>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     @else
@@ -78,7 +83,7 @@
                         @if(session()->has('cart'))
                         <div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
 
-                            <div  class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
+                            <div  class="flex-c-m stext-101del cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
                                 <span onclick='document.querySelector("#formUpdate").submit()'>{{trans('front.update_cart')}}</span>
                             </div>
                         </div>
@@ -222,13 +227,14 @@
         @endif
         const deleteForm = id => {
             swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
+                title: 'supprimer?',
+                text: "supprimer vos achats!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, remove it!'
+                confirmButtonText: 'oui,supprimer!',
+                cancelButtonText:'non revenir au panier'
             }).then((result) => {
 
                 if (result.value) {

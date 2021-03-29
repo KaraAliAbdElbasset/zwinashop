@@ -17,10 +17,9 @@
                 @if(session()->has('cart'))
                     @foreach( session('cart')->getItems() as $item)
                         <li class="header-cart-item flex-w flex-t m-b-12">
-                            <div class="header-cart-item-img">
-                                <img src="{{$item['img']}}" alt="IMG">
+                            <div class="header-cart-item-img" >
+                                <img src="{{$item['img']}}" alt="IMG" >
                             </div>
-
                             <div class="header-cart-item-txt p-t-8">
                                 <a href="{{$item['path']}}" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
                                     {{$item['name']}}
@@ -28,7 +27,10 @@
 
                                 <span class="header-cart-item-info">
 								{{$item['qty']}} x DZD @price($item['price'])
-							</span>
+							    </span>
+                                <span>
+
+                                </span>
                             </div>
                         </li>
                 @endforeach

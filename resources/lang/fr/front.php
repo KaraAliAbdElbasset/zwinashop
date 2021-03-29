@@ -42,7 +42,7 @@ return [
     'shop'               => 'Accueil boutique',
     'blog'               => 'Blog',
     'contact'            => 'Contactez nous',
-    'Copyright ©2021 Tous Droits réservés Develop/IT.'=>' Develop/IT © 2021 جميع الحقوق محفوظة',
+    'copyright'          =>'Tous Droits réservés Develop/IT.',
     'about'              => 'À propos de nous',
     'cms_category'       => 'Catégories CMS',
     'categories'         => 'Catégories',

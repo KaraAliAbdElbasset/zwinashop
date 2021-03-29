@@ -5,7 +5,7 @@
 
 
             <p class="stext-107 cl6 txt-center">
-                Copyright &copy;<script>document.write( new Date().getFullYear());</script> Tous Droits réservés  Develop/IT</a>.
+                Copyright &copy;<script>document.write( new Date().getFullYear());</script> {{trans('front.copyright')}}.
 
             </p>
         </div>
