@@ -86,10 +86,14 @@
                             <div  class="flex-c-m stext-101del cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
                                 <span onclick='document.querySelector("#formUpdate").submit()'>{{trans('front.update_cart')}}</span>
                             </div>
+                            <div  class="flex-c-m stext-101del cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
+                                <span onclick='document.querySelector("#clearFrom").submit()'>Clear</span>
+                            </div>
                         </div>
                         @endif
                     </div>
                     </form>
+                    <form action="{{route('cart.clear')}}" method="post" id="clearFrom">@csrf</form>
                 </div>
 
                 <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
@@ -210,59 +214,22 @@
 
     <script>
 
-        @if(session()->has('success'))
+        @if(session()->has('cart_success'))
         Swal.fire({
             icon: 'success',
             title: 'Success',
-            text:  '{{session('success')}}',
+            text:  '{{session('cart_success')}}',
         })
         @endif
 
-        @if(session()->has('error'))
+        @if(session()->has('cart_error'))
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text:  '{{session('error')}}',
+            text:  '{{session('cart_error')}}',
         })
         @endif
-        const deleteForm = id => {
-            swal.fire({
-                title: 'supprimer?',
-                text: "supprimer vos achats!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'oui,supprimer!',
-                cancelButtonText:'non revenir au panier'
-            }).then((result) => {
 
-                if (result.value) {
-                    createForm(id).submit();
-                }
-            });
-        }
-
-        const createForm = id => {
-            let f = document.createElement("form");
-            f.setAttribute('method',"post");
-            f.setAttribute('action',`/cart/removeItem/${id}`);
-
-            let i1 = document.createElement("input"); //input element, text
-            i1.setAttribute('type',"hidden");
-            i1.setAttribute('name','_token');
-            i1.setAttribute('value','{{csrf_token()}}');
-
-            let i2 = document.createElement("input"); //input element, text
-            i2.setAttribute('type',"hidden");
-            i2.setAttribute('name','_method');
-            i2.setAttribute('value','DELETE');
-
-            f.appendChild(i1);
-            f.appendChild(i2);
-            document.body.appendChild(f);
-            return f;
-        }
 
 
     </script>

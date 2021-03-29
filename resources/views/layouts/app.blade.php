@@ -33,6 +33,8 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/site/css/util.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/site/css/main.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
+
     <!--===============================================================================================-->
     @stack('css')
 </head>
@@ -146,6 +148,8 @@
 </script>
 <!--===============================================================================================-->
 <script src="{{asset('assets/site/vendor/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
+<!-- SweetAlert2 -->
+<script src="{{asset('assets/admin/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
 <script>
     $('.js-pscroll').each(function(){
         $(this).css('position','relative');
@@ -160,6 +164,46 @@
             ps.update();
         })
     });
+
+    const deleteForm = id => {
+        let cart = document.getElementById('showHeaderCart').classList.remove('show-header-cart')
+        swal.fire({
+            title: 'supprimer?',
+            text: "supprimer vos achats!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'oui,supprimer!',
+            cancelButtonText:'non revenir au panier'
+        }).then((result) => {
+
+            if (result.value) {
+                createForm(id).submit();
+            }
+        });
+    }
+
+    const createForm = id => {
+        let f = document.createElement("form");
+        f.setAttribute('method',"post");
+        f.setAttribute('action',`/cart/removeItem/${id}`);
+
+        let i1 = document.createElement("input"); //input element, text
+        i1.setAttribute('type',"hidden");
+        i1.setAttribute('name','_token');
+        i1.setAttribute('value','{{csrf_token()}}');
+
+        let i2 = document.createElement("input"); //input element, text
+        i2.setAttribute('type',"hidden");
+        i2.setAttribute('name','_method');
+        i2.setAttribute('value','DELETE');
+
+        f.appendChild(i1);
+        f.appendChild(i2);
+        document.body.appendChild(f);
+        return f;
+    }
 </script>
 <!--===============================================================================================-->
 <script src="{{asset('assets/site/js/main.js')}}"></script>

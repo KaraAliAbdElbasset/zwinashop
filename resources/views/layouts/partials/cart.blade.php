@@ -1,4 +1,4 @@
-<div class="wrap-header-cart js-panel-cart">
+<div class="wrap-header-cart js-panel-cart " id="showHeaderCart">
     <div class="s-full js-hide-cart"></div>
 
     <div class="header-cart flex-col-l p-l-65 p-r-25">
@@ -15,9 +15,9 @@
         <div class="header-cart-content flex-w js-pscroll">
             <ul class="header-cart-wrapitem w-full">
                 @if(session()->has('cart'))
-                    @foreach( session('cart')->getItems() as $item)
+                    @foreach( session('cart')->getItems() as $key => $item)
                         <li class="header-cart-item flex-w flex-t m-b-12">
-                            <div class="header-cart-item-img" >
+                            <div class="header-cart-item-img" onclick="deleteForm({{$key}})" >
                                 <img src="{{$item['img']}}" alt="IMG" >
                             </div>
                             <div class="header-cart-item-txt p-t-8">
