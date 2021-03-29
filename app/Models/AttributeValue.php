@@ -12,7 +12,7 @@ class AttributeValue extends Model
     /**
      * @var string[]
      */
-    protected $fillable = ['name','display_name'];
+    protected $fillable = ['name','display_name','attribute_id'];
 
 
     public function attribute(): \Illuminate\Database\Eloquent\Relations\BelongsTo

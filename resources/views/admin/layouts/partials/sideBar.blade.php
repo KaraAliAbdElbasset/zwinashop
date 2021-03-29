@@ -68,7 +68,7 @@
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview" style="display: {{request()->is(['admin/categories*','admin/products*'])? 'block' : 'none'}} ">
+                    <ul class="nav nav-treeview" style="display: {{request()->is(['admin/categories*','admin/products*','admin/attributes*'])? 'block' : 'none'}} ">
                         <li class="nav-item">
                             <a href="{{route('admin.categories.index')}}" class="nav-link {{request()->is('admin/categories*')? 'active' : ''}}">
                                 <i class="far fa-circle nav-icon"></i>
@@ -81,6 +81,12 @@
                                 <p>produits</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.attributes.index')}}" class="nav-link {{request()->is('admin/attributes*')? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>attributes</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -89,6 +95,15 @@
                         <p>
                             commandes
                             <span class="badge  {{request()->is('admin/orders*') ? 'badge-danger' : 'badge-info'}} right">{{$order_count}}</span>
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.carousel.index')}}" class="nav-link {{request()->is('admin/carousel*') ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-file-invoice"></i>
+                        <p>
+                            Carousel
+
                         </p>
                     </a>
                 </li>

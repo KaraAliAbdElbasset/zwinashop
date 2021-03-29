@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\ProductContract;
+use App\Models\AttributeValue;
+use App\Models\Carousel;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -15,14 +17,16 @@ class WebsiteController extends Controller
         $categories =Category::whereNull('category_id')->get();
         $prod = Product::with('categories')->get();
         $catwp =Category::with('products')->get();
-        return view('welcome',compact('categories','prod','catwp'));
+        $images = Carousel::orderBy('created_at','desc')->where('state',true)->get();
+        return view('welcome',compact('categories','prod','catwp','images'));
     }
 
     public function shop(ProductContract $product)
     {
         $categories = Category::latest()->get();
+        $attributes = AttributeValue::with('attribute')->get();
         $products = $product->findByFilter(\request()->get('per_page')??16,['categories'],['active','latest']);
-        return view('website.pages.shop',compact('products','categories'));
+        return view('website.pages.shop',compact('products','categories','attributes'));
     }
 
     public function product($id,ProductContract $product)

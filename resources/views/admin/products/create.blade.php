@@ -43,7 +43,7 @@
                                 <label for="name">nom</label>
                                 <input type="text" id="name" name="name" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror" required>
                                 @error('name')
-                                <div class="invalid-feedback">{{$message}}</div>
+                                    <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="form-group">

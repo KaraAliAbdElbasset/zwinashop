@@ -44,7 +44,7 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                     <div class="d-flex justify-content-start">
-                        <a href="{{route('admin.carousel.create')}}" title="Create New User" class="btn btn-info"><i class="fas fa-plus"></i></a>
+                        <a href="{{route('admin.carousel.create')}}" title="Create New Image" class="btn btn-info"><i class="fas fa-plus"></i></a>
                     </div>
                     <table id="table" class="table table-bordered table-hover">
                         <thead>

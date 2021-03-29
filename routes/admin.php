@@ -27,6 +27,7 @@ Route::middleware('auth:admin')->group(static function(){
 
     Route::resource('categories',App\Http\Controllers\Admin\CategoryController::class);
     Route::resource('carousel',App\Http\Controllers\Admin\CarouselController::class);
+    Route::resource('attributes',App\Http\Controllers\Admin\AttributeValueController::class);
     Route::resource('orders',App\Http\Controllers\Admin\OrderController::class)->except(['edit','create','store']);
     Route::resource('products',App\Http\Controllers\Admin\ProductController::class);
     Route::prefix('products')->group(static function(){
