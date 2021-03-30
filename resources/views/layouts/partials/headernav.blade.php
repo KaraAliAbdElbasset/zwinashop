@@ -82,6 +82,17 @@
                     <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="{{session()->has('cart')? session('cart')->getTotalQty() : 0 }}">
                         <i class="zmdi zmdi-shopping-cart"></i>
                     </div>
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle text-dark icon-header-item cl0 hov-cl1 trans-04 p-lr-11" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="zmdi zmdi-globe" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="{{route('switchLang','ar')}}">العربية</a>
+                            <a class="dropdown-item" href="{{route('switchLang','fr')}}">Français</a>
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -217,6 +228,17 @@
                     <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="{{session()->has('cart')? session('cart')->getTotalQty() : 0 }}">
                         <i class="zmdi zmdi-shopping-cart"></i>
                     </div>
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle text-dark icon-header-item cl0 hov-cl1 trans-04 p-lr-11" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="zmdi zmdi-globe" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="{{route('switchLang','ar')}}">العربية</a>
+                            <a class="dropdown-item" href="{{route('switchLang','fr')}}">Français</a>
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
