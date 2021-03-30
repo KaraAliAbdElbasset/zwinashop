@@ -3,7 +3,7 @@
 
 return [
     'all_product'        => 'Tout les articles',
-
+    'clear'              =>'vider le panier',
     'my_profile'         => 'Mon profil',
     'price'              => 'prix',
     'quantity'           => 'quantité',

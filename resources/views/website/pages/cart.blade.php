@@ -86,8 +86,8 @@
                             <div  class="flex-c-m stext-101del cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
                                 <span onclick='document.querySelector("#formUpdate").submit()'>{{trans('front.update_cart')}}</span>
                             </div>
-                            <div  class="flex-c-m stext-101del cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
-                                <span onclick='document.querySelector("#clearFrom").submit()'>Clear</span>
+                            <div  class="flex-c-m stext-101del cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10" onclick='document.querySelector("#clearFrom").submit()'>
+                                <span>{{trans('front.clear')}}</span>
                             </div>
                         </div>
                         @endif

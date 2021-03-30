@@ -4,6 +4,7 @@
 return [
     'all_product'        => 'جميع المنتجات',
     'buy_now'            =>'اشتري الآن',
+    'clear'              =>'أفرغ السلة',
     'my_profile'         => 'حسابي',
     'my_account'         => 'حسابي',
     'notfound'           => 'غير موجود',
