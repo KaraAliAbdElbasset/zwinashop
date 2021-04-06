@@ -224,14 +224,16 @@
 
     });
 
-    $('.btn-num-product-up').on('click', function(){
-        var numProduct = Number($(this).prev().val());
-        $(this).prev().val(numProduct + 1);
-        $('#formUpdate').submit()
-    });
-
     /*==================================================================
-    [ Rating ]*/
+[ Rating ]*/
+$('.btn-num-product-up').on('click', function(){
+    var numProduct = Number($(this).prev().val());
+    $(this).prev().val(numProduct + 1);
+    $('#formUpdate').submit()
+});
+
+/*==================================================================
+[ Rating ]*/
     $('.wrap-rating').each(function(){
         var item = $(this).find('.item-rating');
         var rated = -1;
