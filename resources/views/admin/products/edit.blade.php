@@ -380,6 +380,8 @@
     </div>
 @endsection
 @push('js')
+    <script src="{{asset("js/app.js")}}"></script>
+
     <!-- Summernote -->
     <script src="{{asset("assets/admin/plugins/summernote/summernote-bs4.min.js")}}"></script>
     <!-- Select2 -->
@@ -459,5 +461,4 @@
             }
         }
     </script>
-    <script src="{{asset("js/app.js")}}"></script>
 @endpush
