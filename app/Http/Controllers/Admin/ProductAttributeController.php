@@ -56,7 +56,7 @@ class ProductAttributeController extends Controller
             'attribute_value_id' => 'required|integer|exists:attribute_values,id',
             'image' => 'sometimes|nullable|file|image|max:5000',
             'price' => 'sometimes|nullable|numeric|gte:0',
-            'value' => 'required|string',
+            'value' => 'sometimes|nullable|string',
             'attribute' => 'required|string',
         ]);
 
