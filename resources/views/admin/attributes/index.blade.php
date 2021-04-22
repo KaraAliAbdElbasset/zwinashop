@@ -40,19 +40,11 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <div class="row d-flex justify-content-end">
 
-                                    <div class="col-md-6">
-                                        <form action="">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" name="search" value="{{request('search')}}" placeholder="Recherche">
-                                                <span class="input-group-append">
-                                                <button class="btn btn-info text-white" type="submit"><i class="fas fa-search"></i></button>
-                                            </span>
-                                            </div>
-                                        </form>
-                                    </div>
+                                <div class="d-flex justify-content-start">
+                                    <a href="{{route('admin.attributes.create')}}" title="Create New Brand" class="btn btn-info"><i class="fas fa-plus"></i></a>
                                 </div>
+
                                 <table id="table" class="table mt-3">
                                     <thead class="bg-info">
                                     <tr>
