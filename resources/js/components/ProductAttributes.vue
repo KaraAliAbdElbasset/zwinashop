@@ -100,7 +100,7 @@
                 currentAttributeId: '',
                 currentValue: '',
                 image: '',
-                currentPrice: '',
+                currentPrice: 0,
             }
         },
         mounted: function() {
@@ -145,7 +145,7 @@
                 this.valueSelected = true;
                 this.currentValue = value.value;
                 this.currentQty = value.quantity;
-                this.currentPrice = value.price;
+                this.currentPrice = value.price ? value.price : 0;
             },
             addProductAttribute() {
                 if ( this.currentPrice === null) {
@@ -174,7 +174,7 @@
                         });
                         _this.currentValue = '';
                         _this.image = null;
-                        _this.currentPrice = '';
+                        _this.currentPrice = 0;
                         _this.valueSelected = false;
 
                         _this.loadProductAttributes(_this.productid);

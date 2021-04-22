@@ -2149,7 +2149,7 @@ __webpack_require__.r(__webpack_exports__);
       currentAttributeId: '',
       currentValue: '',
       image: '',
-      currentPrice: ''
+      currentPrice: 0
     };
   },
   mounted: function mounted() {
@@ -2197,7 +2197,7 @@ __webpack_require__.r(__webpack_exports__);
       this.valueSelected = true;
       this.currentValue = value.value;
       this.currentQty = value.quantity;
-      this.currentPrice = value.price;
+      this.currentPrice = value.price ? value.price : 0;
     },
     addProductAttribute: function addProductAttribute() {
       if (this.currentPrice === null) {
@@ -2225,7 +2225,7 @@ __webpack_require__.r(__webpack_exports__);
 
           _this.currentValue = '';
           _this.image = null;
-          _this.currentPrice = '';
+          _this.currentPrice = 0;
           _this.valueSelected = false;
 
           _this.loadProductAttributes(_this.productid);
