@@ -21,7 +21,13 @@
             <div class="sidebar-gallery w-full p-tb-30">
 					<span class="mtext-101 cl5">
                         {{trans('front.follow')}}
-						@ ZWINASTORE
+                        INSTAGRAM <br>
+						@ ZWINA.BOUTIQUE
+					</span>
+                <span class="mtext-101 cl5">
+                        {{trans('front.follow')}}
+                        FACEBOOK <br>
+						@ ZWINA
 					</span>
             </div>
 
