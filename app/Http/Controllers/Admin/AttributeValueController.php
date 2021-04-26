@@ -56,7 +56,7 @@ class AttributeValueController extends Controller
     public function destroy(AttributeValue $attribute)
     {
         $attribute->delete();
-        session()->flash("success","Attribute Value Has Been Deleted successfully");
+        session()->flash("sucscess","Attribute Value Has Been Deleted successfully");
         return redirect()->route('admin.attributes.index');
     }
 }

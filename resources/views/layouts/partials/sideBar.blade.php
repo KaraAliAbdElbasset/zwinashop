@@ -24,6 +24,7 @@
                         INSTAGRAM <br>
 						@ ZWINA.BOUTIQUE
 					</span>
+                <br>
                 <span class="mtext-101 cl5">
                         {{trans('front.follow')}}
                         FACEBOOK <br>
