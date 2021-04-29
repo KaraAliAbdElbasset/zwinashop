@@ -17,13 +17,14 @@
                 @if(session()->has('cart'))
                     @foreach( session('cart')->getItems() as $key => $item)
                         <li class="header-cart-item flex-w flex-t m-b-12">
-                            <div class="header-cart-item-img" onclick="deleteForm({{$key}})" >
+                            <div class="header-cart-item-img col-4" onclick="deleteForm({{$key}})" >
                                 <img src="{{$item['img']}}" alt="IMG" >
                             </div>
-                            <div class="header-cart-item-txt p-t-8">
+                            <div class="header-cart-item-txt p-t-8 col-6">
                                 <a href="{{$item['path']}}" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
                                     {{$item['name']}}
                                 </a>
+
 
                                 <span class="header-cart-item-info">
 								{{$item['qty']}} x DZD @price($item['price'])
@@ -31,9 +32,14 @@
                                 <span>
 
                                 </span>
+
+
                             </div>
+                            <div  class=" header-cart-item-info col-1" onclick="deleteForm({{$key}})"><i class="zmdi zmdi-close"></i></div>
+
                         </li>
-                @endforeach
+
+                    @endforeach
                 @else
                     <li class="header-cart-item flex-w flex-t m-b-12">
 
