@@ -33,15 +33,15 @@
 
                             <div class="slick3 gallery-lb">
                                 @foreach($images as $img)
-                                <div class="item-slick3" data-thumb="{{$img['image']}}" data-attribute="{{$img['attribute']}}" id="slick-{{$img['attribute']}}">
-                                    <div class="wrap-pic-w pos-relative" >
-                                        <img src="{{$img['image']}}" alt="IMG-PRODUCT" id="img-{{$img['attribute']}}">
+                                    <div class="item-slick3" data-thumb="{{$img['image']}}" data-attribute="{{$img['attribute']}}" id="slick-{{$img['attribute']}}">
+                                        <div class="wrap-pic-w pos-relative" >
+                                            <img src="{{$img['image']}}" alt="IMG-PRODUCT" id="img-{{$img['attribute']}}">
 
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" id="link-{{$img['attribute']}}" href="{{$img['image']}}">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
+                                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" id="link-{{$img['attribute']}}" href="{{$img['image']}}">
+                                                <i class="fa fa-expand"></i>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
                                 @endforeach
 
                             </div>
@@ -68,13 +68,13 @@
                                 @if($attributes->has('size'))
                                     <div class="flex-w flex-r-m p-b-10">
                                         <div class="size-203 flex-c-m respon6">
-                                            Size
+                                            Taille
                                         </div>
 
                                         <div class="size-204 respon6-next">
                                             <div class="rs1-select2 bor8 bg0">
                                                 <select name="attributes[size]" id="size" class="js-select2" name="size">
-                                                    <option disabled selected>Choose an option</option>
+                                                    <option disabled selected>Taille</option>
                                                     @foreach($attributes['size'] as $s)
                                                         <option value="{{$s->id}}" data-price="{{$s->price}}">Size {{$s->value}} (+DZD @price($s->price))</option>
                                                     @endforeach
@@ -85,22 +85,46 @@
                                         </div>
                                     </div>
                                 @endif
+                                <style>
+                                    /* HIDE RADIO */
+                                    [type=radio] {
+                                        position: absolute;
+                                        opacity: 0;
+                                        width: 0;
+                                        height: 0;
+                                    }
 
+                                    /* IMAGE STYLES */
+                                    [type=radio] + img {
+                                        cursor: pointer;
+                                        height: 100%;
+                                        width: 100%;
+                                    }
+
+                                    /* CHECKED STYLES */
+                                    [type=radio]:checked + img {
+                                        outline: 2px solid #f00;
+                                    }
+
+                                </style>
                                 @if($attributes->has('color'))
                                     <div class="flex-w flex-r-m p-b-10">
                                         <div class="size-203 flex-c-m respon6">
-                                            Color
+                                            Couleur
                                         </div>
 
                                         <div class="size-204 respon6-next">
-                                            <div class="rs1-select2 bor8 bg0">
-                                                <select id="color" name="attributes[color]" class="js-select2">
-                                                    <option disabled selected>Choose an option</option>
-                                                    @foreach($attributes['color'] as $key => $s)
-                                                        <option value="{{$s->id}}" data-price="{{$s->price}}">{{$s->value}} (+DZD @price($s->price))</option>
-                                                    @endforeach
-                                                </select>
-                                                <div class="dropDownSelect2"></div>
+                                            <div class="row">
+
+                                                @foreach($attributes['color'] as $key => $s)
+                                                    <div class="col-3">
+                                                        <label>
+                                                            <input id="color" type="radio" name="attributes[color]" value="{{$s->id}}" data-price="{{$s->price}}">
+                                                            <img src="/storage/{{$s->image}}">
+                                                        </label>
+                                                    </div>
+                                                @endforeach
+
                                             </div>
                                         </div>
                                     </div>
@@ -119,12 +143,12 @@
                                             </div>
                                         </div>
                                         <div class="align-content-center">
-                                        <button type="submit" class="flex-c-m  mx-auto stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-                                            {{trans('front.add_to_cart')}}
-                                        </button>
-                                        <button onclick="buy()" class=" mt-2 mx-auto flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-                                            {{trans('front.buy_now')}}
-                                        </button>
+                                            <button type="submit" class="flex-c-m  mx-auto stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                                {{trans('front.add_to_cart')}}
+                                            </button>
+                                            <button onclick="buy()" class=" mt-2 mx-auto flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                                {{trans('front.buy_now')}}
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -186,6 +210,7 @@
 
 @push('js')
     <script>
+
         let basePrice = {{$p->price}};
         let colorPrice = 0;
         let sizePrice = 0;
@@ -218,7 +243,7 @@
         }
 
         @if($errors->has('attribute') > 0)
-            swal('Error', "Please Select attribute", "Error");
+        swal('Error', "Please Select attribute", "Error");
         @endif
 
         @if(session()->has('success'))
