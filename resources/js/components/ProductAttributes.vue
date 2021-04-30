@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="row" v-if="valueSelected">
-                <div class="col-md-4">
+                <div class="col-md-4" v-if="attribute.name === 'color'">
                     <div class="form-group">
                         <label class="control-label" for="image">Image</label>
                         <input class="form-control" @change="prepareForUpload()" type="file" ref="file" id="image" />
@@ -66,7 +66,15 @@
                         </thead>
                         <tbody>
                         <tr v-for="pa in productAttributes">
-                            <td style="width: 25%" class="text-center"><img class=" img-fluid  img-thumbnail" width="80px" height="40px" :src="pa.image_url" :alt="pa.value"></td>
+                            <td style="width: 25%" class="text-center">
+                                <img class="img-fluid  img-thumbnail"
+                                     width="80px"
+                                     height="40px"
+                                     v-if="pa.image_url"
+                                     :src="pa.image_url"
+                                     :alt="pa.value">
+                                <span v-else> Empty </span>
+                            </td>
                             <td style="width: 25%" class="text-center">{{ pa.attribute}}</td>
                             <td style="width: 25%" class="text-center">{{ pa.value}}</td>
                             <td style="width: 25%" class="text-center">{{ pa.price}}</td>

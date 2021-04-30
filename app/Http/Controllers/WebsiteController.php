@@ -41,7 +41,9 @@ class WebsiteController extends Controller
         ];
         foreach ($attributes as $key => $a)
         {
-            $images[] = ['image' => $a , 'attribute' => $key];
+            if ($a){
+                $images[] = ['image' => $a , 'attribute' => $key];
+            }
         }
         if (\request()->ajax())
         {

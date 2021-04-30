@@ -2134,6 +2134,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "product-attributes",
   props: ['productid'],
@@ -24709,26 +24717,31 @@ var render = function() {
           _vm._v(" "),
           _vm.valueSelected
             ? _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      { staticClass: "control-label", attrs: { for: "image" } },
-                      [_vm._v("Image")]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      ref: "file",
-                      staticClass: "form-control",
-                      attrs: { type: "file", id: "image" },
-                      on: {
-                        change: function($event) {
-                          return _vm.prepareForUpload()
-                        }
-                      }
-                    })
-                  ])
-                ]),
+                _vm.attribute.name === "color"
+                  ? _c("div", { staticClass: "col-md-4" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "control-label",
+                            attrs: { for: "image" }
+                          },
+                          [_vm._v("Image")]
+                        ),
+                        _vm._v(" "),
+                        _c("input", {
+                          ref: "file",
+                          staticClass: "form-control",
+                          attrs: { type: "file", id: "image" },
+                          on: {
+                            change: function($event) {
+                              return _vm.prepareForUpload()
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-4" }, [
                   _c("div", { staticClass: "form-group" }, [
@@ -24810,15 +24823,17 @@ var render = function() {
                       staticStyle: { width: "25%" }
                     },
                     [
-                      _c("img", {
-                        staticClass: " img-fluid  img-thumbnail",
-                        attrs: {
-                          width: "80px",
-                          height: "40px",
-                          src: pa.image_url,
-                          alt: pa.value
-                        }
-                      })
+                      pa.image_url
+                        ? _c("img", {
+                            staticClass: "img-fluid  img-thumbnail",
+                            attrs: {
+                              width: "80px",
+                              height: "40px",
+                              src: pa.image_url,
+                              alt: pa.value
+                            }
+                          })
+                        : _c("span", [_vm._v(" Empty ")])
                     ]
                   ),
                   _vm._v(" "),

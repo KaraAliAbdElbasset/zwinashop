@@ -119,7 +119,7 @@
                                                 @foreach($attributes['color'] as $key => $s)
                                                     <div class="col-3">
                                                         <label>
-                                                            <input id="color" type="radio" name="attributes[color]" value="{{$s->id}}" data-price="{{$s->price}}">
+                                                            <input id="color" data-price="{{$s->price}}" type="radio" name="attributes[color]" value="{{$s->id}}" data-price="{{$s->price}}">
                                                             <img src="/storage/{{$s->image}}">
                                                         </label>
                                                     </div>
@@ -214,9 +214,11 @@
         let basePrice = {{$p->price}};
         let colorPrice = 0;
         let sizePrice = 0;
-        $('#color').change(function(e) {
+
+        $("input[type=radio]").change(function(e) {
             // var slideno = $('options').data('slide');
-            colorPrice = $(this).find(':selected').data('price');
+            colorPrice = $(this).data('price');
+
             //.toFixed(2) .00
             let total = parseInt(basePrice) + parseInt(colorPrice) +parseInt(sizePrice);
             $('#display-price').html(`DZD ${total.format(0,3)}`)
